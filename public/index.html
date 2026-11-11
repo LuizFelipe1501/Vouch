@@ -18,12 +18,13 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+html,body{overflow-x:clip;max-width:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--mist);color:var(--ink);font:18px/1.6 var(--body);-webkit-font-smoothing:antialiased}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--aqua);outline-offset:3px;border-radius:4px}
 .wrap{max-width:1160px;margin:0 auto;padding:0 28px}
-.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.vh,.join .vh{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;border:0!important;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 h1,h2,h3{font-family:var(--display);font-stretch:118%;color:var(--ink);margin:0}
 h2{font-size:clamp(32px,4.4vw,52px);line-height:1.02;font-weight:800;letter-spacing:-.02em;max-width:20ch}
 h3{font-size:20px;font-weight:700;font-stretch:108%;letter-spacing:-.005em}
@@ -58,7 +59,7 @@ header.top{position:sticky;top:0;z-index:10;background:rgba(230,247,251,.92);bac
 .hero .lede{font-size:20px;margin-top:26px}
 .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
 .fine{color:var(--dim);font-size:15px;margin-top:16px}
-@media (max-width:960px){.hero{grid-template-columns:1fr;gap:48px;padding-top:40px}}
+@media (max-width:960px){.hero{grid-template-columns:1fr;gap:48px;padding-top:40px}.stamp{right:12px}}
 
 /* evidence board */
 .board .from,.msg,.verdict,.tl .ex,.chat p{font-family:var(--wafont)}
@@ -85,7 +86,7 @@ header.top{position:sticky;top:0;z-index:10;background:rgba(230,247,251,.92);bac
   @keyframes stamp{to{opacity:1;transform:rotate(8deg) scale(1)}}
 }
 @media (prefers-reduced-motion:reduce){.msg mark{background-size:100% 100%}}
-@media (max-width:560px){.wrap{padding-left:20px;padding-right:20px}.board{padding:28px 18px 20px}.notes{grid-template-columns:1fr}.msg{font-size:18px}.stamp{font-size:26px;right:-6px}}
+@media (max-width:560px){.wrap{padding-left:20px;padding-right:20px}.board{padding:28px 18px 20px}.notes{grid-template-columns:1fr}.msg{font-size:18px}.stamp{font-size:26px;right:10px;top:-22px}}
 
 /* facts strip */
 .facts{background:var(--ink);color:var(--mist);padding:56px 0}
@@ -96,19 +97,36 @@ header.top{position:sticky;top:0;z-index:10;background:rgba(230,247,251,.92);bac
 .facts li small{display:block;margin-top:10px;font-size:13px;color:#7FA6B8}
 @media (max-width:800px){.facts ul{grid-template-columns:1fr;gap:28px}}
 
-/* timeline */
-.tl{margin-top:56px;border-top:2px solid var(--ink)}
-.tl li{list-style:none;display:grid;grid-template-columns:110px 1fr 1fr;gap:32px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start}
+/* timeline + simulated phone */
+.how{display:grid;grid-template-columns:1fr 380px;gap:64px;margin-top:56px;align-items:start}
+.tl{border-top:2px solid var(--ink)}
 .tl ol{margin:0;padding:0}
-.tl time{font:800 26px var(--display);font-stretch:112%;color:var(--aquat);font-variant-numeric:tabular-nums}
+.tl li{list-style:none;display:grid;grid-template-columns:96px 1fr;gap:24px;padding:24px 0 24px 16px;border-bottom:1px solid var(--line);border-left:4px solid transparent;transition:opacity .3s,border-color .3s,background .3s}
+.tl time{font:800 24px var(--display);font-stretch:112%;color:var(--aquat);font-variant-numeric:tabular-nums}
 .tl p{color:var(--mute);margin-top:6px}
-.tl .ex{font-size:16px;background:var(--paper);border-radius:12px;padding:12px 14px;border:1px solid var(--line);color:var(--ink)}
-.tl .ex.red{border-left:6px solid var(--redf)}
-.tl .ex.q{border-left:6px solid var(--aqua)}
-.tl .ex.v{border-left:6px solid var(--veef)}
-.tl .ex .pill{display:inline-block;margin:8px 8px 0 0;padding:5px 12px;border-radius:999px;border:1px solid var(--line);font-size:14px;color:var(--aquat);font-weight:700}
-.tl .ex .pill.no{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-@media (max-width:820px){.tl li{grid-template-columns:1fr;gap:10px}}
+.how.play .tl li{opacity:.45}
+.how.play .tl li.on{opacity:1;border-left-color:var(--aqua);background:rgba(255,255,255,.55)}
+.sim{position:sticky;top:96px;background:var(--wa);border:1px solid #DDD5C8;border-radius:30px;overflow:hidden;box-shadow:0 24px 60px -24px rgba(11,42,60,.35);font-family:var(--wafont)}
+.sim .hd{display:flex;align-items:center;gap:10px;padding:14px 16px;background:#F0F2F5;border-bottom:1px solid #E2E5E8}
+.sim .hd i{width:36px;height:36px;border-radius:50%;background:#CFD6DB;display:grid;place-items:center;flex:none}
+.sim .hd i.vo{background:var(--ink);color:var(--mist)}
+.sim .hd i .owl{width:24px;height:24px}
+.sim .hd b{display:block;font-size:15px;color:#111B21}
+.sim .hd small{display:block;font-size:12.5px;color:#667781;min-height:1.2em}
+.sim .hd small.ty{color:#0B9E70}
+.sim .bd{height:440px;padding:14px 12px;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;overflow:hidden}
+.sim .m{max-width:84%;padding:7px 10px;border-radius:10px;font-size:15px;line-height:1.4;color:#111B21;background:#fff;align-self:flex-start;box-shadow:0 1px 1px rgba(0,0,0,.08);animation:pop .28s ease-out}
+.sim .m.out{align-self:flex-end;background:var(--waout)}
+.sim .m .fw{display:block;font-size:12px;color:#667781;font-style:italic;margin-bottom:2px}
+.sim .m .card{display:block;margin:-2px -4px 6px;padding:6px 9px;border-radius:7px;font-weight:700;color:#fff}
+.sim .m .card.red{background:var(--redf)}.sim .m .card.ok{background:var(--safe)}.sim .m .card.vee{background:var(--veef)}
+.sim .m.tap{align-self:flex-start;width:84%;text-align:center;color:var(--aquat);font-weight:700}
+.sim .m.sys{align-self:center;background:#FFF5C4;color:#54656F;font-size:12.5px;text-align:center;max-width:92%}
+.sim .ft{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;font-size:13px;color:#54656F;background:#F0F2F5;border-top:1px solid #E2E5E8}
+.sim .ft button{font:700 13px var(--body);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--ink);cursor:pointer}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.sim .m{animation:none}}
+@media (max-width:960px){.how{grid-template-columns:1fr}.sim{position:relative;top:0;max-width:420px;order:-1}}
 
 /* vee */
 #vee{background:#0E2233;color:#D8EDF4}
@@ -247,13 +265,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <section id="como"><div class="wrap">
   <h2 data-i="c_h">Do golpe chegar ao golpe barrado: 40 segundos.</h2>
   <p class="lede" data-i="c_i">Sua mãe não precisa aprender nada. Ela só encaminha a mensagem, como já faz todo dia.</p>
+  <div class="how" id="how">
   <div class="tl"><ol>
-    <li><time>00:00</time><div><h3 data-i="t1h">A mensagem chega</h3><p data-i="t1p">Número novo, nome de um filho, pedido de dinheiro.</p></div><div class="ex" data-i="t1x">"Mãe, sou eu, troquei de número…"</div></li>
-    <li><time>00:05</time><div><h3 data-i="t2h">Ela encaminha para o Vouch</h3><p data-i="t2p">Pode ser texto, áudio ou print. O Vouch fica salvo no WhatsApp como qualquer contato.</p></div><div class="ex" data-i="t2x">Encaminhada ↪ Vouch</div></li>
-    <li><time>00:09</time><div><h3 data-i="t3h">O aviso vem em palavras simples</h3><p data-i="t3p">Vermelho é golpe, amarelo é suspeito. Sempre com o motivo.</p></div><div class="ex red" data-i="t3x"><b>Parece golpe.</b> Número novo, pressa e pedido de Pix. Não pague ainda.</div></li>
-    <li><time>00:15</time><div><h3 data-i="t4h">O Vouch pergunta para você</h3><p data-i="t4p">Se usaram o seu nome, você recebe a pergunta. Um toque resolve.</p></div><div class="ex q" data-i="t4x">Você pediu R$ 1.800 para sua mãe?<br><span class="pill">Sim, fui eu</span><span class="pill no">Não fui eu</span></div></li>
-    <li><time>00:40</time><div><h3 data-i="t5h">A Vee assume a conversa</h3><p data-i="t5p">Sua mãe manda um recado pronto ao golpista. Quem continua o papo é a Vee.</p></div><div class="ex v" data-i="t5x">"Quem faz meus Pix é meu neto. Fala com ele aqui."</div></li>
+    <li data-s="0"><time>00:00</time><div><h3 data-i="t1h">A mensagem chega</h3><p data-i="t1p">Número novo, nome de um filho, pedido de dinheiro.</p></div></li>
+    <li data-s="1"><time>00:05</time><div><h3 data-i="t2h">Ela encaminha para o Vouch</h3><p data-i="t2p">Pode ser texto, áudio ou print. O Vouch fica salvo no WhatsApp como qualquer contato.</p></div></li>
+    <li data-s="2"><time>00:09</time><div><h3 data-i="t3h">O aviso vem em palavras simples</h3><p data-i="t3p">Vermelho é golpe, amarelo é suspeito. Sempre com o motivo.</p></div></li>
+    <li data-s="3"><time>00:15</time><div><h3 data-i="t4h">O Vouch pergunta para você</h3><p data-i="t4p">Se usaram o seu nome, você recebe a pergunta. Um toque resolve.</p></div></li>
+    <li data-s="4"><time>00:40</time><div><h3 data-i="t5h">A Vee assume a conversa</h3><p data-i="t5p">Sua mãe manda um recado pronto ao golpista. Quem continua o papo é a Vee.</p></div></li>
   </ol></div>
+  <div class="sim" aria-label="Simulação de conversa no WhatsApp" aria-live="off">
+    <div class="hd"><i id="simAv" aria-hidden="true"></i><span><b id="simT"></b><small id="simS"></small></span></div>
+    <div class="bd" id="simB"></div>
+    <div class="ft"><span data-i="simL">Simulação</span><button type="button" id="simR" data-i="simR">Ver de novo</button></div>
+  </div>
+  </div>
 </div></section>
 
 <section id="vee"><div class="wrap">
@@ -400,7 +425,7 @@ a5q:'¿Qué hacen con los mensajes?',a5a:'Guardamos solo los datos del estafador
 e_h:'Pon Vouch en el WhatsApp de tus papás hoy.',e_i:'Deja tu número. Te escribimos por WhatsApp y te ayudamos a configurarlo en dos minutos.',
 nml:'Tu nombre',ccl:'País',phl:'Tu WhatsApp',wl:'A quién quieres proteger',nm:'Tu nombre',ph:'Tu WhatsApp con lada',
 wo:'<option value="">¿A quién quieres proteger?</option><option>Mamá o papá</option><option>Abuela o abuelo</option><option>A mí mismo</option><option>Soy de un banco o empresa</option>',
-cta2:'Quiero Vouch',ft1:'Vouch, creado en el Desafío FGV 2026, en Brasilia.',ft3:'Privacidad',ft2:'Vouch no sustituye a tu banco ni a la policía.'},
+cta2:'Quiero Vouch',simL:'Simulación',simR:'Ver otra vez',ft1:'Vouch, creado en el Desafío FGV 2026, en Brasilia.',ft3:'Privacidad',ft2:'Vouch no sustituye a tu banco ni a la policía.'},
 en:{n1:'How it works',n2:'Vee',n3:'Plans',n4:'For banks',ctaTop:'Protect my parents',
 h1:'Your mom is going to get this message.',
 lead:'What matters is who she talks to before she pays. Vouch is a WhatsApp contact that reads the message, checks with you and, if it is a scam, puts an AI on the scammer to waste their time.',
@@ -439,7 +464,7 @@ a5q:'What do you do with the messages?',a5a:'We keep only the scammer\'s details
 e_h:'Put Vouch on your parents\' WhatsApp today.',e_i:'Leave your number. We\'ll message you on WhatsApp and help you set it up in two minutes.',
 nml:'Your name',ccl:'Country',phl:'Your WhatsApp',wl:'Who do you want to protect',nm:'Your name',ph:'Your WhatsApp number',
 wo:'<option value="">Who do you want to protect?</option><option>Mom or dad</option><option>Grandma or grandpa</option><option>Myself</option><option>I\'m from a bank or company</option>',
-cta2:'Get Vouch',ft1:'Vouch, built at the FGV Challenge 2026 in Brasília.',ft3:'Privacy',ft2:'Vouch does not replace your bank or the police.'}};
+cta2:'Get Vouch',simL:'Simulation',simR:'Watch again',ft1:'Vouch, built at the FGV Challenge 2026 in Brasília.',ft3:'Privacy',ft2:'Vouch does not replace your bank or the police.'}};
 var M={pt:{send:'Enviando...',ok:'Pronto. Vamos te chamar no WhatsApp.',err:'Não consegui salvar agora. Tente de novo em alguns minutos.',net:'Sem conexão. Confira a internet e tente de novo.',of:'Mensagem {i} de {n}',pts:'{p} pontos',right:'Acertou! +20 pontos.',ws:'Essa era golpe.',wr:'Essa era real.',end:'Fim do treino',fin:'Você fez {p} de {m} pontos. No WhatsApp, o treino continua todo dia.',title:'Vouch: antes de pagar, sua mãe pergunta pra gente.'},
 es:{send:'Enviando...',ok:'Listo. Te escribiremos por WhatsApp.',err:'No pude guardar ahora. Inténtalo en unos minutos.',net:'Sin conexión. Revisa internet e inténtalo de nuevo.',of:'Mensaje {i} de {n}',pts:'{p} puntos',right:'¡Correcto! +20 puntos.',ws:'Era estafa.',wr:'Era real.',end:'Fin del entrenamiento',fin:'Hiciste {p} de {m} puntos. En WhatsApp el entrenamiento sigue todos los días.',title:'Vouch: antes de pagar, tu mamá nos pregunta.'},
 en:{send:'Sending...',ok:'Done. We will message you on WhatsApp.',err:'Could not save right now. Try again in a few minutes.',net:'No connection. Check your internet and try again.',of:'Message {i} of {n}',pts:'{p} points',right:'Correct! +20 points.',ws:'That was a scam.',wr:'That was real.',end:'Practice done',fin:'You scored {p} of {m} points. On WhatsApp, practice continues every day.',title:'Vouch: before she pays, your mom asks us.'}};
@@ -474,6 +499,7 @@ function setLang(l){
   var cc={pt:'55',es:'52',en:'91'}[lang];document.querySelectorAll('select.cc').forEach(function(s){if(!s.dataset.touched)s.value=cc});
   try{localStorage.setItem('vouch-lang',lang)}catch(e){}
   if(quiz)quiz.reset();
+  if(window.sim)sim.reset();
 }
 document.querySelectorAll('select.cc').forEach(function(s){s.addEventListener('change',function(){s.dataset.touched=1})});
 document.querySelectorAll('[data-lang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.lang)})});
@@ -501,6 +527,53 @@ quiz=(function(){
     timer=setTimeout(function(){i++;if(i<q().length)show();else{qt.textContent=fmt(t.fin,{p:pts,m:q().length*20});qn.textContent=t.end;btns.forEach(function(x){x.disabled=true})}},2600);
   })});
   return{reset:function(){clearTimeout(timer);i=0;pts=0;show()}};
+})();
+
+var SIM={
+pt:{scam:'+55 61 9••••-4417',vouch:'Vouch',on:'online',ty:'digitando…',steps:[
+ [['in','Mãe, sou eu, troquei de número. Preciso de R$ 1.800 no Pix agora, é urgente. Não conta pro pai.']],
+ [['chat'],['out','<span class="fw">Encaminhada</span>Mãe, sou eu, troquei de número. Preciso de R$ 1.800 no Pix agora…']],
+ [['ty'],['in','<span class="card red">🔴 Parece golpe</span>Número novo, pressa e pedido de Pix. Não pague ainda. Vou perguntar ao Lucas.']],
+ [['sys','O Vouch perguntou ao Lucas: "Você pediu R$ 1.800 para sua mãe?"'],['ty'],['in','<span class="card ok">✅ O Lucas respondeu: não foi ele</span>É golpe. Pode ignorar o pedido.']],
+ [['tap','🎣 Desviar para a Vee'],['out','Quem faz meus Pix é meu neto. Fala com ele aqui: vouch.app/vee'],['in','<span class="card vee">🦉 A Vee assumiu</span>Agora ela conversa com o golpista. Te aviso quando pegar a conta dele.']]]},
+es:{scam:'+52 55 ••••-4417',vouch:'Vouch',on:'en línea',ty:'escribiendo…',steps:[
+ [['in','Mamá, soy yo, cambié de número. Necesito $9,000 por transferencia ahora, es urgente. No le digas a papá.']],
+ [['chat'],['out','<span class="fw">Reenviado</span>Mamá, soy yo, cambié de número. Necesito $9,000 por transferencia…']],
+ [['ty'],['in','<span class="card red">🔴 Parece estafa</span>Número nuevo, prisa y pedido de dinero. No pagues todavía. Le voy a preguntar a Lucas.']],
+ [['sys','Vouch le preguntó a Lucas: "¿Le pediste $9,000 a tu mamá?"'],['ty'],['in','<span class="card ok">✅ Lucas respondió: no fue él</span>Es estafa. Puedes ignorar el pedido.']],
+ [['tap','🎣 Desviar a Vee'],['out','Mis transferencias las hace mi nieto. Habla con él aquí: vouch.app/vee'],['in','<span class="card vee">🦉 Vee tomó la conversación</span>Ahora ella habla con el estafador. Te aviso cuando consiga su cuenta.']]]},
+en:{scam:'+91 98•••-•4417',vouch:'Vouch',on:'online',ty:'typing…',steps:[
+ [['in','Mom, it\'s me, I got a new number. I need ₹15,000 on UPI right now, it\'s urgent. Don\'t tell Dad.']],
+ [['chat'],['out','<span class="fw">Forwarded</span>Mom, it\'s me, I got a new number. I need ₹15,000 on UPI…']],
+ [['ty'],['in','<span class="card red">🔴 Looks like a scam</span>New number, urgency and a money request. Don\'t pay yet. I\'ll ask Arjun.']],
+ [['sys','Vouch asked Arjun: "Did you ask your mom for ₹15,000?"'],['ty'],['in','<span class="card ok">✅ Arjun replied: it wasn\'t him</span>It\'s a scam. You can ignore the request.']],
+ [['tap','🎣 Send to Vee'],['out','My grandson handles my payments. Talk to him here: vouch.app/vee'],['in','<span class="card vee">🦉 Vee took over</span>She\'s talking to the scammer now. I\'ll tell you when she gets his account.']]]}};
+var sim=(function(){
+  var how=document.getElementById('how');if(!how)return null;
+  var B=document.getElementById('simB'),T=document.getElementById('simT'),S=document.getElementById('simS'),A=document.getElementById('simAv'),lis=how.querySelectorAll('.tl li');
+  var owl='<svg viewBox="0 0 400 400" class="owl" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"><use href="#owl-core"/><path d="M186 252 L199 265 L222 240" stroke="#1FB5D6"/></g><use href="#owl-eyes" fill="currentColor"/></svg>';
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,timers=[],started=false;
+  function clear(){timers.forEach(clearTimeout);timers=[]}
+  function head(vouch){var d=SIM[lang];T.textContent=vouch?d.vouch:d.scam;S.textContent=d.on;S.className='';A.className=vouch?'vo':'';A.innerHTML=vouch?owl:''}
+  function add(k,x){var e=document.createElement('div');e.className='m'+(k==='in'?'':' '+k);e.innerHTML=x;B.appendChild(e);while(B.children.length>7)B.removeChild(B.firstChild)}
+  function mark(i){lis.forEach(function(l,j){l.classList.toggle('on',j===i)})}
+  function run(){clear();B.innerHTML='';head(false);how.classList.add('play');var d=SIM[lang],t=300;
+    d.steps.forEach(function(step,i){
+      timers.push(setTimeout(function(){mark(i)},t));
+      step.forEach(function(it){
+        if(it[0]==='chat'){timers.push(setTimeout(function(){B.innerHTML='';head(true)},t+200));t+=700;return}
+        if(it[0]==='ty'){timers.push(setTimeout(function(){S.textContent=SIM[lang].ty;S.className='ty'},t));t+=1300;timers.push(setTimeout(function(){S.textContent=SIM[lang].on;S.className=''},t));return}
+        timers.push(setTimeout(function(){add(it[0],it[1])},t));t+=1700;
+      });
+      t+=900;
+    });
+    timers.push(setTimeout(run,t+3500));
+  }
+  function still(){clear();how.classList.remove('play');B.innerHTML='';head(true);var d=SIM[lang];[d.steps[2][1],d.steps[3][2],d.steps[4][2]].forEach(function(it){add(it[0],it[1])})}
+  function start(){started=true;reduce?still():run()}
+  document.getElementById('simR').addEventListener('click',function(){reduce?still():run()});
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!started)start()})},{threshold:.3});io.observe(how)}else start();
+  return{reset:function(){if(started)start();else head(false)}};
 })();
 (function(){var saved;try{saved=localStorage.getItem('vouch-lang')}catch(e){}
   var q=new URLSearchParams(location.search).get('lang'),nav=(navigator.language||'pt').slice(0,2);
