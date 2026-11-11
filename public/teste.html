@@ -47,6 +47,14 @@ form{display:flex;gap:8px;padding:10px;background:var(--wa)}
 form input{flex:1;min-width:0;font:inherit;font-size:15px;padding:11px 14px;border-radius:22px;border:0;background:var(--wa2);color:var(--waink)}
 form input::placeholder{color:#8696A0}
 form button{width:44px;height:44px;border-radius:50%;border:0;background:var(--wagreen);color:#FFFFFF;font-weight:700;display:grid;place-items:center}
+.stage>div{min-width:0}.m{overflow-wrap:anywhere}
+.auto{max-width:1380px;margin:0 auto;padding:0 20px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.auto button{font:700 15px var(--body);border-radius:10px;padding:10px 16px;cursor:pointer;border:2px solid var(--ink);background:var(--ink);color:#fff}
+.auto button.alt{background:#fff;color:var(--ink)}
+.auto span{font-size:15px;color:var(--mute)}
+.auto span.live::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#14C38E;margin-right:8px;vertical-align:1px;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.25}}
+.phone.focus{box-shadow:0 0 0 3px var(--aqua),0 24px 70px rgba(10,147,181,.2)}
 .foot{max-width:1380px;margin:0 auto;padding:0 20px 40px;color:var(--dim);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .foot button{background:transparent;border:1px solid var(--line);color:var(--mute);border-radius:10px;padding:7px 12px}
 .vh{position:absolute;left:-9999px}
@@ -60,6 +68,7 @@ form button{width:44px;height:44px;border-radius:50%;border:0;background:var(--w
 </div>
 <div class="intro"><h1 data-t="h1"></h1><p data-t="p"></p></div>
 <div class="steps" id="steps"></div>
+<div class="auto"><button id="play" type="button"></button><span id="autoMsg" role="status" aria-live="polite"></span></div>
 <div class="stage">
   <div>
     <p class="role"><span data-t="r1"></span><small id="n1"></small></p>
@@ -80,15 +89,15 @@ var T={
 pt:{h1:'Teste o Vouch pelos três lados do golpe',p:'Primeiro celular: quem recebe o golpe. Segundo: o filho que confirma. Terceiro: o golpista, que você também pode ser. É o mesmo assistente e a mesma IA que rodam no WhatsApp.',r1:'Celular da Helena (quem recebe o golpe)',r2:'Celular do Lucas (família)',r3:'Celular do golpista (você faz o papel)',bad:'Neto da Helena',fromA:'Mensagem que a Helena te mandou:',open:'Abrir conversa com o "neto"',cx:['Faz logo, é urgente!','Manda pra chave golpista.pix@gmail.com','Tenta essa outra: 123.456.789-09'],f:'Simulação do WhatsApp do Vouch. Nenhum dado real é usado.',rs:'Recomeçar',ph:'Mensagem',on:'online',
  s:['Diga oi','Seu nome','Número da família','Encaminhe um golpe','A família responde','Desvie para a Vee'],
  hi:'oi',nm:'Helena',fam:'Usar o número do Lucas',ex:[['Golpe do filho','Mãe, sou eu, troquei de número. Preciso de R$ 1.800 no Pix agora pra pagar o conserto do carro, é urgente, depois te explico.'],['Falso banco','Central de segurança do banco: detectamos uma compra de R$ 3.200. Para cancelar, informe o código que chegou por SMS e clique em bit.ly/seg-banco'],['Mensagem normal','Oi mãe, cheguei bem. O ônibus atrasou mas deu tudo certo. Te ligo à noite.']],
- sent:'Mensagem enviada para o celular do Lucas, à direita.',wait:'Vouch está digitando…',err:'Sem conexão com o Vouch. Tente de novo.',name2:'Lucas',cc:'55',area:'61'},
+ sent:'Mensagem enviada para o celular do Lucas, à direita.',wait:'Vouch está digitando…',err:'Sem conexão com o Vouch. Tente de novo.',name2:'Lucas',cc:'55',area:'61',aPlay:'▶ Assistir a simulação',aStop:'Parar e testar eu mesmo',aRun:'Simulação rodando. É só assistir, ou toque em parar para testar você mesmo.',aDone:'Pronto. Agora é sua vez: escreva em qualquer um dos três celulares.',aOff:'Escreva ou toque nas sugestões de cada celular para testar.',aKey:'isca'},
 es:{h1:'Prueba Vouch desde los tres lados de la estafa',p:'Primer celular: quien recibe la estafa. Segundo: el hijo que confirma. Tercero: el estafador, que también puedes ser tú. Es el mismo asistente y la misma IA que funcionan en WhatsApp.',r1:'Celular de María (quien recibe la estafa)',r2:'Celular de Juan (familia)',r3:'Celular del estafador (tú haces el papel)',bad:'Nieto de María',fromA:'Mensaje que María te envió:',open:'Abrir chat con el "nieto"',cx:['¡Rápido, es urgente!','Deposita a la CLABE 012180001234567891','Prueba esta otra: estafa.pagos@gmail.com'],f:'Simulación del WhatsApp de Vouch. No se usan datos reales.',rs:'Empezar de nuevo',ph:'Mensaje',on:'en línea',
  s:['Saluda','Tu nombre','Número de la familia','Reenvía una estafa','La familia responde','Pásalo a Vee'],
  hi:'hola',nm:'María',fam:'Usar el número de Juan',ex:[['Estafa del hijo','Mamá, soy yo, cambié de número. Necesito $5,000 por transferencia ahora para pagar el taller, es urgente, luego te explico.'],['Falso banco','Le hablamos de su banco: detectamos un cargo de $8,000. Para cancelarlo, díganos el código que le llegó por SMS y entre a bit.ly/banco-seg'],['Mensaje normal','Mamá, ya llegué. El camión se retrasó pero todo bien. Te llamo en la noche.']],
- sent:'Mensaje enviado al celular de Juan, a la derecha.',wait:'Vouch está escribiendo…',err:'Sin conexión con Vouch. Inténtalo de nuevo.',name2:'Juan',cc:'52',area:'55'},
+ sent:'Mensaje enviado al celular de Juan, a la derecha.',wait:'Vouch está escribiendo…',err:'Sin conexión con Vouch. Inténtalo de nuevo.',name2:'Juan',cc:'52',area:'55',aPlay:'▶ Ver la simulación',aStop:'Detener y probar yo',aRun:'Simulación en curso. Solo mira, o toca detener para probar tú.',aDone:'Listo. Ahora te toca: escribe en cualquiera de los tres celulares.',aOff:'Escribe o toca las sugerencias de cada celular para probar.',aKey:'cebo'},
 en:{h1:'Try Vouch from all three sides of a scam',p:'First phone: the person who gets the scam. Second: the son who confirms. Third: the scammer, and you can play that part too. It is the same assistant and the same AI that run on WhatsApp.',r1:"Priya's phone (gets the scam)",r2:"Arjun's phone (family)",r3:"Scammer's phone (you play the part)",bad:"Priya's grandson",fromA:'Message Priya sent you:',open:'Open chat with the "grandson"',cx:['Hurry, it is urgent!','Send it to UPI scam.pay@okaxis','Try this one: fraud.cash@gmail.com'],f:'A simulation of the Vouch WhatsApp chat. No real data is used.',rs:'Start over',ph:'Message',on:'online',
  s:['Say hi','Your name','Family number','Forward a scam','Family answers','Send to Vee'],
  hi:'hi',nm:'Priya',fam:"Use Arjun's number",ex:[['Fake son','Mum, it\'s me, I changed my number. I need ₹15,000 on UPI right now for the car repair, it\'s urgent, I\'ll explain later.'],['Fake bank','Bank security team: we blocked a ₹40,000 payment. To cancel it, share the OTP we just sent and open bit.ly/bank-safe'],['Normal message','Mum, I got home safe. The train was late but all good. I\'ll call you tonight.']],
- sent:"Message sent to Arjun's phone, on the right.",wait:'Vouch is typing…',err:'No connection to Vouch. Try again.',name2:'Arjun',cc:'91',area:'98'}};
+ sent:"Message sent to Arjun's phone, on the right.",wait:'Vouch is typing…',err:'No connection to Vouch. Try again.',name2:'Arjun',cc:'91',area:'98',aPlay:'▶ Watch the simulation',aStop:'Stop and try it myself',aRun:'Simulation running. Just watch, or tap stop to try it yourself.',aDone:'Done. Your turn now: type in any of the three phones.',aOff:'Type or tap the suggestions on each phone to try it.',aKey:'bait'}};
 
 // ----- WhatsApp look: same rules as the real webhook (api/meta.js) -----
 var LABEL={jogar:'🎯 Jogar',placar:'🏆 Placar',plano:'👨‍👩‍👧 Plano Família',assinar:'✨ Testar grátis',pular:'Pular',jugar:'🎯 Jugar',marcador:'🏆 Marcador',plan:'👨‍👩‍👧 Plan Familia',suscribir:'✨ Probar gratis',saltar:'Saltar',play:'🎯 Play',score:'🏆 Score',subscribe:'✨ Try it free',skip:'Skip',isca:'🎣 Desviar para a Vee',cebo:'🎣 Pasarlo a Vee',bait:'🎣 Send to Vee'};
@@ -158,18 +167,56 @@ function render(){
   var L=T[lang];document.getElementById('steps').innerHTML=L.s.map(function(s,i){return'<span class="'+(i===Math.min(stepIdx,5)?'on':'')+'">'+(i+1)+'. '+s+'</span>'}).join('');
   chipsA();
 }
-function start(){
+function start(keep){
+  if(!keep&&window.AUTO){AUTO.on=false;AUTO.run++}
   var L=T[lang];document.querySelectorAll('[data-t]').forEach(function(e){e.textContent=L[e.dataset.t]});
   document.documentElement.lang={pt:'pt-BR',es:'es',en:'en'}[lang];document.title={pt:'Teste o Vouch',es:'Prueba Vouch',en:'Try Vouch'}[lang];
   document.querySelectorAll('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===lang)});
   var n=numbers();P.A=build('A',L.nm,n[0]);P.B=build('B',L.name2,n[1]);P.C=build('C','',n[2],L.bad);
   document.getElementById('n1').textContent=pretty(n[0]);document.getElementById('n2').textContent=pretty(n[1]);document.getElementById('n3').textContent=pretty(n[2]);
-  stepIdx=0;render();
+  stepIdx=0;render();if(window.AUTO)uiAuto();
 }
 document.querySelectorAll('[data-lang]').forEach(function(b){b.onclick=function(){lang=b.dataset.lang;start()}});
 document.getElementById('reset').onclick=start;
 var q=new URLSearchParams(location.search).get('lang'),nav=(navigator.language||'pt').slice(0,2);
-lang=(q==='es'||q==='en'||q==='pt')?q:(nav==='es'||nav==='en'?nav:'pt');start();
+
+// ----- Autoplay: drives the real flow, same API as typing by hand -----
+var AUTO={run:0,on:false};
+function sleep(ms){return new Promise(function(ok){setTimeout(ok,ms)})}
+function alive(id){return AUTO.on&&AUTO.run===id}
+async function until(fn,ms,id){var t=0;while(t<ms){if(!alive(id))return null;var v=fn();if(v)return v;await sleep(250);t+=250}return null}
+function focusPhone(p){['A','B','C'].forEach(function(k){P[k].el.classList.toggle('focus',P[k]===p)})}
+async function typeSay(p,text,id){
+  focusPhone(p);await until(function(){return !p.busy},30000,id);if(!alive(id))return;
+  var step=Math.max(8,Math.min(28,1100/text.length));
+  for(var i=1;i<=text.length;i++){if(!alive(id))return;p.input.value=text.slice(0,i);await sleep(step)}
+  await sleep(350);if(!alive(id))return;p.input.value='';await say(p,text,text);await sleep(1200);
+}
+function lastBtns(p){var b=p.log.querySelectorAll('.btns');b=b[b.length-1];return b&&!b.querySelector('button:disabled')?b:null}
+async function tap(p,btn,id){focusPhone(p);await sleep(700);if(!alive(id))return;btn.click();await sleep(400);await until(function(){return !p.busy},30000,id);await sleep(1200)}
+async function autoplay(){
+  var id=++AUTO.run;AUTO.on=true;uiAuto();var L=T[lang];
+  await typeSay(P.A,L.hi,id);
+  await typeSay(P.A,L.nm,id);
+  await typeSay(P.A,P.B.num,id);
+  await typeSay(P.A,L.ex[0][1],id);
+  var b=await until(function(){return lastBtns(P.B)},20000,id);
+  if(b){var no=b.querySelectorAll('button')[1]||b.querySelector('button');await tap(P.B,no,id)}
+  if(!alive(id))return;
+  var ib=await until(function(){var x=lastBtns(P.A);if(!x)return null;var f=null;x.querySelectorAll('button').forEach(function(y){if(/🎣/.test(y.textContent))f=y});return f},6000,id);
+  if(ib)await tap(P.A,ib,id);else await typeSay(P.A,L.aKey,id);
+  var ref=await until(function(){return P.C.ref},15000,id);
+  if(ref){P.C.started=true;await typeSay(P.C,ref,id);for(var i=0;i<L.cx.length&&alive(id);i++)await typeSay(P.C,L.cx[i],id)}
+  if(!alive(id))return;AUTO.on=false;focusPhone(null);uiAuto(true);render();
+}
+function stopAuto(){AUTO.on=false;AUTO.run++;focusPhone(null);uiAuto()}
+function uiAuto(done){var L=T[lang],b=document.getElementById('play'),m=document.getElementById('autoMsg');
+  if(AUTO.on){b.textContent=L.aStop;b.className='alt';m.textContent=L.aRun;m.className='live'}
+  else{b.textContent=L.aPlay;b.className='';m.textContent=done?L.aDone:L.aOff;m.className=''}}
+document.getElementById('play').onclick=function(){if(AUTO.on)stopAuto();else{start(true);autoplay()}};
+document.addEventListener('pointerdown',function(e){if(AUTO.on&&e.target.closest('.phone'))stopAuto()},true);
+document.addEventListener('keydown',function(e){if(AUTO.on&&e.target.closest&&e.target.closest('.phone'))stopAuto()},true);
+lang=(q==='es'||q==='en'||q==='pt')?q:(nav==='es'||nav==='en'?nav:'pt');start();setTimeout(function(){if(!AUTO.on&&!P.A.log.children.length){start(true);autoplay()}},900);
 </script>
 </body>
 </html>
