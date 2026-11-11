@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vouch — console de teste</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>body{font:15px Inter,system-ui,sans-serif;margin:0;background:#0b0b0c;color:#f4f4f5}main{max-width:520px;margin:0 auto;height:100vh;display:flex;flex-direction:column;border-left:1px solid #26262b;border-right:1px solid #26262b}
+header{padding:14px 16px;border-bottom:1px solid #26262b}header b{font:600 17px "Space Grotesk",sans-serif}header small{color:#9b9ba3}select,input,button{font:inherit}#who{margin-top:10px;width:100%;padding:9px;border-radius:10px;border:1px solid #26262b;background:#141416;color:#f4f4f5}
+#log{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:9px}.m{max-width:85%;padding:9px 12px;border-radius:14px;white-space:pre-wrap;line-height:1.45;border:1px solid #26262b}.me{align-self:flex-end;background:#232327}.bot{align-self:flex-start;background:#1b1b1e}.sys{align-self:center;font-size:12px;color:#6b6b73;text-align:center;border:0}
+form{display:flex;gap:8px;padding:12px;border-top:1px solid #26262b}#t{flex:1;padding:11px;border:1px solid #26262b;border-radius:12px;background:#141416;color:#f4f4f5}button{background:#f4f4f5;color:#0b0b0c;border:0;border-radius:12px;padding:10px 16px;font-weight:600;cursor:pointer}</style></head>
+<body><main><header><b>Vouch</b> <small>console de teste. O produto roda no WhatsApp; isto só simula a conversa.</small>
+<select id="who" aria-label="Quem está escrevendo"><option value="+5561900000001">Escrever como: Helena (protegida)</option><option value="+5561900000002">Escrever como: Lucas (pessoa de confiança)</option><option value="+525512345601">México: María (protegida)</option><option value="+525512345602">México: Juan (confianza)</option><option value="+919876500001">India: Priya (protected)</option><option value="+919876500002">India: Arjun (trusted)</option></select></header>
+<div id="log" aria-live="polite"></div><form id="f"><input id="t" placeholder="Digite ou cole uma mensagem" autocomplete="off"><button>Enviar</button></form></main>
+<script>
+const log=document.getElementById('log'),who=document.getElementById('who'),names={'+5561900000001':'Helena','+5561900000002':'Lucas','+525512345601':'María','+525512345602':'Juan','+919876500001':'Priya','+919876500002':'Arjun'},hist={};
+function show(){log.innerHTML='';(hist[who.value]||[]).forEach(([c,x])=>{const d=document.createElement('div');d.className='m '+c;d.textContent=x;log.appendChild(d)});log.scrollTop=1e9}
+function push(p,c,x){(hist[p]=hist[p]||[]).push([c,x]);if(p===who.value)show()}
+who.onchange=show;
+fetch('/api/chat').then(r=>r.json()).then(s=>push(who.value,'sys','Dados: '+s.store+' · Gemini: '+(s.gemini?'ligado':'sem chave (regras fixas)')+' · Twilio: '+(s.twilio?'ligado':'não configurado')));
+document.getElementById('f').onsubmit=async e=>{e.preventDefault();const t=document.getElementById('t'),x=t.value.trim();if(!x)return;t.value='';const from=who.value;push(from,'me',x);
+ try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({from,text:x})}).then(r=>r.json());
+ (r.replies||[r.error]).forEach(m=>push(from,'bot',m));(r.outbox||[]).forEach(o=>{push(o.to,'bot',o.text);if(o.to!==from)push(from,'sys','Mensagem enviada para '+(names[o.to]||o.to)+'. Troque de pessoa no topo para responder.')})}catch(err){push(from,'sys','Erro: '+err.message)}};
+</script></body></html>

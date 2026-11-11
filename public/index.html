@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vouch: antes de pagar, a família confirma</title>
+<meta name="description" content="Assistente no WhatsApp que avisa quando uma mensagem parece golpe e confirma com a sua família antes de você pagar. Em português, espanhol e inglês.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0c;--panel:#141416;--panel2:#1b1b1e;--line:#26262b;--ink:#f4f4f5;--mute:#9b9ba3;--dim:#6b6b73;--sign:#ffc93c;--red:#f05252;--safe:#34d399;--blue:#5b8def;--display:"Space Grotesk",system-ui,sans-serif;--body:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}:focus-visible{outline:2px solid var(--sign);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;letter-spacing:-.03em;line-height:1.05}
+h2{font-size:clamp(32px,4.4vw,48px);max-width:20ch}p{margin:0}
+.owl{display:block}
+header.top{position:sticky;top:0;z-index:5;background:rgba(11,11,12,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:20px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font:600 20px var(--display);text-decoration:none;letter-spacing:-.02em}
+.logo .owl{width:30px;height:30px}
+.bar nav{display:flex;gap:24px;margin-left:auto;font-size:15px}.bar nav a{text-decoration:none;color:var(--mute)}.bar nav a:hover{color:var(--ink)}
+.bar nav a.try{color:var(--sign)}
+@media(max-width:880px){.bar nav{display:none}.langs{margin-left:auto}}
+.langs{display:flex;gap:2px;border:1px solid var(--line);border-radius:10px;padding:3px}
+.langs button{font:600 13px var(--body);border:0;background:transparent;color:var(--mute);padding:6px 9px;border-radius:7px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;padding:84px 0 110px}
+@media(max-width:900px){.hero{grid-template-columns:1fr;gap:48px;padding:56px 0 80px}}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:14px;color:var(--mute);margin-bottom:26px}
+.hero h1{font-size:clamp(44px,6.4vw,76px)}.hero h1 span{display:block;color:var(--mute)}
+.lead{font-size:19px;color:var(--mute);margin:26px 0 34px;max-width:40ch}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+.join{display:flex;gap:10px;flex-wrap:wrap;max-width:560px}
+.join input,.join select{font:inherit;font-size:16px;padding:14px 15px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);min-width:0}
+.join input{flex:1 1 200px}.join input::placeholder{color:var(--dim)}
+.join select.cc{flex:0 0 auto;max-width:160px}
+.btn{font:600 16px var(--body);padding:14px 22px;border-radius:12px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer;text-decoration:none;display:inline-block}
+.btn:hover{background:#fff}.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}.btn.ghost:hover{border-color:var(--mute)}
+.btn.sign{background:var(--sign);border-color:var(--sign);color:#1d1600}.btn.sign:hover{background:#ffd666}
+.note{font-size:14px;color:var(--dim);margin-top:16px}.note a{color:var(--mute)}
+.msg{font-size:15px;min-height:1.5em;flex-basis:100%}.msg.ok{color:var(--safe)}.msg.err{color:var(--red)}
+.phone{background:var(--panel);border:1px solid var(--line);border-radius:28px;overflow:hidden;max-width:380px;margin-left:auto;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+@media(max-width:900px){.phone{margin:0 auto}}
+.phead{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.phead b{font:600 16px var(--display)}.phead small{display:block;color:var(--safe);font-size:13px}
+.av{width:38px;height:38px;border-radius:50%;background:var(--panel2);border:1px solid var(--line);display:grid;place-items:center}.av .owl{width:26px;height:26px}
+.chat{display:flex;flex-direction:column;gap:10px;padding:16px;min-height:420px}
+.b{max-width:86%;padding:10px 13px;border-radius:14px;font-size:14.5px;line-height:1.45;background:var(--panel2);border:1px solid var(--line)}
+.b.out{align-self:flex-end;background:#232327}
+.b .fw{display:block;font-size:12px;color:var(--dim);font-style:italic;margin-bottom:3px}
+.b .tag{display:inline-block;font-weight:600;font-size:12px;padding:2px 8px;border-radius:999px;margin-bottom:5px}
+.tag.red{background:rgba(240,82,82,.15);color:var(--red)}.tag.ok{background:rgba(52,211,153,.14);color:var(--safe)}
+.b.sys{align-self:center;background:transparent;border:1px dashed var(--line);color:var(--mute);font-size:13px;text-align:center}
+.qb{display:flex;gap:6px;margin-top:8px}.qb span{flex:1;text-align:center;font-size:13px;font-weight:600;padding:6px;border-radius:9px;border:1px solid var(--line)}
+.qb span.no{color:var(--red);border-color:rgba(240,82,82,.45);background:rgba(240,82,82,.1)}
+.anim .step{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease}.anim .step.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.anim .step{opacity:1;transform:none;transition:none}}
+section{padding:110px 0;border-top:1px solid var(--line)}
+.intro{font-size:18px;color:var(--mute);max-width:58ch;margin-top:18px}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px}
+.facts div{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px}
+.facts strong{font:600 clamp(30px,3.6vw,42px)/1.05 var(--display);letter-spacing:-.03em;display:block;margin-bottom:10px}
+.facts div:first-child strong{color:var(--sign)}
+.facts span{color:var(--mute)}.facts cite{display:block;font-style:normal;font-size:13px;color:var(--dim);margin-top:12px}
+@media(max-width:720px){.facts{grid-template-columns:1fr}}
+.how{padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:52px 0 0;counter-reset:s}
+@media(max-width:860px){.how{grid-template-columns:1fr}}
+.how li{list-style:none;counter-increment:s;padding-top:18px;border-top:1px solid var(--line)}
+.how li::before{content:"0" counter(s);font-size:13px;color:var(--dim);display:block;margin-bottom:22px}
+.how h3{font-size:22px;margin-bottom:10px}.how p{color:var(--mute)}
+#teste{background:linear-gradient(180deg,rgba(255,201,60,.06),transparent 70%)}
+.try{margin-top:44px;max-width:720px}
+@media(max-width:860px){.try{grid-template-columns:1fr}}
+.try ol{margin:0;padding:0;counter-reset:t}.try li{list-style:none;counter-increment:t;display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--line)}
+.try li::before{content:counter(t);width:30px;height:30px;border-radius:50%;background:var(--sign);color:#1d1600;font:600 15px/30px var(--display);text-align:center}
+.try li span{color:var(--mute)}.try li b{color:var(--ink);font-weight:600}
+.try .ctas{margin-top:26px}
+.wa{margin-top:18px;font-size:14px;color:var(--dim)}.wa b{color:var(--mute)}
+.quiz{margin-top:48px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+@media(max-width:860px){.quiz{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px}
+.card .q{font-size:18px;line-height:1.5;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:18px}
+.card .opts{display:flex;gap:10px;margin-top:16px}.card .opts button{flex:1}
+.card .opts .no{background:transparent;color:var(--red);border-color:rgba(240,82,82,.45)}.card .opts .no:hover{background:rgba(240,82,82,.1)}
+.card .opts .yes{background:transparent;color:var(--safe);border-color:rgba(52,211,153,.4)}.card .opts .yes:hover{background:rgba(52,211,153,.08)}
+.card .fb{margin-top:16px;min-height:3.2em;font-size:15.5px;color:var(--mute)}.card .fb b{display:block;color:var(--ink)}
+.score{font:500 14px var(--body);color:var(--dim);margin-bottom:14px;display:flex;justify-content:space-between}
+.perks{padding:0;margin:0}.perks li{list-style:none;padding:20px 0;border-top:1px solid var(--line)}.perks li:first-child{border-top:0;padding-top:0}
+.perks b{display:block;font:600 19px var(--display);margin-bottom:4px}.perks span{color:var(--mute)}
+.mascot{display:flex;gap:18px;align-items:center;margin-top:28px;padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.mascot .owl{width:64px;height:64px;flex:0 0 auto}.mascot b{font:600 17px var(--display)}.mascot span{display:block;color:var(--mute);font-size:15px}
+.globe{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:48px}
+@media(max-width:900px){.globe{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.globe{grid-template-columns:1fr}}
+.globe div{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+.globe em{font:600 13px var(--body);font-style:normal;color:var(--dim);display:block;margin-bottom:12px;letter-spacing:.02em}
+.globe strong{font:600 30px/1.05 var(--display);letter-spacing:-.03em;display:block;margin-bottom:8px}
+.globe div:first-child{background:var(--sign);border-color:var(--sign);color:#1d1600}.globe div:first-child em,.globe div:first-child span,.globe div:first-child cite{color:#4a3a00}
+.globe span{color:var(--mute);font-size:15px}.globe cite{display:block;font-style:normal;font-size:12.5px;color:var(--dim);margin-top:10px}
+.road{padding:0;margin:40px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:860px){.road{grid-template-columns:1fr}}
+.road li{list-style:none;border-top:1px solid var(--line);padding:22px 0 0}
+.road em{font:600 15px var(--body);font-style:normal;color:var(--dim);display:block;margin-bottom:12px}
+.road li:first-child em{color:var(--sign)}
+.road h3{font-size:22px;margin-bottom:8px}.road p{color:var(--mute);font-size:15.5px}
+.srcs{margin-top:22px;font-size:13px;color:var(--dim);max-width:90ch}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
+@media(max-width:960px){.plans{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.plans{grid-template-columns:1fr}}
+.plans article{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column}
+.plans article.main{background:var(--ink);color:var(--bg)}.plans article.main p,.plans article.main li{color:#3f3f46}
+.plans em{font:600 13px var(--body);font-style:normal;color:var(--dim);margin-bottom:14px}.plans article.main em{color:#6b6b73}
+.plans h3{font-size:24px;margin-bottom:6px}.plans .price{font:600 30px var(--display);letter-spacing:-.03em;margin:6px 0 2px}.plans .per{font-size:14px;color:var(--dim)}
+.plans p{color:var(--mute);font-size:15.5px;margin-top:10px}.plans ul{margin:14px 0 0;padding-left:18px;color:var(--mute);font-size:15px}.plans li{margin-bottom:5px}
+.unit{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:22px;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+@media(max-width:720px){.unit{grid-template-columns:1fr}}
+.unit div{padding:20px 22px;border-right:1px solid var(--line)}.unit div:last-child{border-right:0}
+.unit strong{font:600 26px var(--display);display:block;letter-spacing:-.02em}.unit span{color:var(--mute);font-size:15px}
+.sci{margin-top:44px;border-top:1px solid var(--line)}
+.sci div{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:24px 0;border-bottom:1px solid var(--line)}
+@media(max-width:760px){.sci div{grid-template-columns:1fr;gap:8px}}
+.sci p{color:var(--mute)}.sci p:first-child{font:500 18px/1.45 var(--display);letter-spacing:-.01em;color:var(--ink)}
+.sci small{display:block;color:var(--dim);font-size:13px;margin-top:6px}
+.faq{margin-top:36px;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line);padding:20px 0}
+details summary{font:600 19px var(--display);cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";color:var(--dim);font-weight:400}details[open] summary::after{content:"–"}
+details p{margin-top:12px;color:var(--mute);max-width:64ch}
+.final{text-align:center}.final h2{margin:0 auto}.final .owl{width:90px;height:90px;margin:0 auto 28px}.final .join{margin:34px auto 0;justify-content:center}
+footer{padding:36px 0 50px;border-top:1px solid var(--line);color:var(--dim);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}footer a{color:var(--mute)}
+.vh{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<g id="owl-core"><path d="M118 118 L104 44 L170 92 C190 86 210 86 230 92 L296 44 L282 118 C312 150 324 190 324 232 C324 306 270 352 200 352 C130 352 76 306 76 232 C76 190 88 150 118 118 Z"/><path d="M108 150 C140 128 182 138 200 176 C218 138 260 128 292 150"/><circle cx="150" cy="200" r="36"/><circle cx="250" cy="200" r="36"/></g>
+<g id="owl-eyes"><circle cx="150" cy="200" r="11"/><circle cx="250" cy="200" r="11"/></g>
+<g id="owl-body"><path d="M168 300 L180 288 L192 300"/><path d="M208 300 L220 288 L232 300"/><path d="M188 326 L200 314 L212 326"/><path d="M168 352 V370 M232 352 V370"/></g>
+</defs></svg>
+<header class="top"><div class="wrap bar">
+    <a class="logo" href="#"><svg viewBox="0 0 400 400" aria-hidden="true" class="owl"><g fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"><use href="#owl-core"/><path d="M186 252 L199 265 L222 240" stroke="#ffc93c"/></g><use href="#owl-eyes" fill="currentColor"/></svg>Vouch</a>
+    <nav aria-label="Seções"><a href="#problema" data-i="n1">O problema</a><a href="#como" data-i="n2">Como funciona</a><a href="#mundo" data-i="n4">No mundo</a><a href="#modelo" data-i="n6">Modelo</a><a href="#faq" data-i="n5">Dúvidas</a><a href="#teste" class="try" data-i="n7">Teste agora</a></nav>
+    <div class="langs" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" lang="pt">PT</button><button type="button" data-lang="es" lang="es">ES</button><button type="button" data-lang="en" lang="en">EN</button></div>
+</div></header>
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <span class="pill" data-i="pill">Antigolpe no WhatsApp, em 3 idiomas</span>
+      <h1 data-i="h1">A voz é do seu filho. <span>O pedido não.</span></h1>
+      <p class="lead" data-i="lead">O Vouch é um contato no WhatsApp. Sua mãe encaminha a mensagem estranha, ele avisa se parece golpe e pergunta a você se o pedido é seu de verdade. Tudo antes de qualquer pagamento.</p>
+      <div class="ctas"><a class="btn sign" href="/teste" data-i="cta0">Testar agora, sem cadastro</a><a class="btn ghost" href="#entrar" data-i="cta1">Quero proteger minha família</a></div>
+      <p class="note" data-i="note">Grátis para quem é protegido. Português, espanhol e inglês.</p>
+    </div>
+    <div class="phone" aria-label="Vouch">
+      <div class="phead"><div class="av" aria-hidden="true"><svg viewBox="0 0 400 400" class="owl"><g fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"><use href="#owl-core"/><path d="M186 252 L199 265 L222 240" stroke="#ffc93c"/></g><use href="#owl-eyes" fill="currentColor"/></svg></div><div><b>Vouch</b><small>online</small></div></div>
+      <div class="chat" id="demo">
+        <div class="b out step"><span class="fw" data-i="fw">Encaminhada</span><span data-i="d1">Oi mãe, sou eu. Meu celular quebrou, esse é meu número novo. Consegue me fazer um Pix de R$ 1.800 hoje? É urgente.</span></div>
+        <div class="b step"><span class="tag red" data-i="tg1">🔴 Parece golpe</span><br><span data-i="d2">Número novo, pressa e pedido de dinheiro juntos. Não pague ainda. Já perguntei ao Lucas se foi ele.</span></div>
+        <div class="b sys step"><span data-i="d3">Lucas recebeu: "Foi você que pediu R$ 1.800 para sua mãe?"</span><div class="qb"><span data-i="d3a">✅ Sim, fui eu</span><span class="no" data-i="d3b">⛔ Não fui eu</span></div></div>
+        <div class="b step"><span class="tag ok" data-i="tg2">🛡️ Golpe barrado</span><br><span data-i="d4">Não foi o Lucas. Bloqueie o número. Você acabou de proteger R$ 1.800.</span></div>
+        <div class="b out step" data-i="d5">Ufa. Obrigada!</div>
+      </div>
+    </div>
+  </div>
+</div>
+<section id="problema"><div class="wrap">
+  <h2 data-i="p_h">O golpe chega pelo WhatsApp e termina em minutos.</h2>
+  <p class="intro" data-i="p_i">O golpista não precisa invadir nada. Ele convence alguém a fazer a transferência, com pressa, usando o nome de quem a pessoa ama. Hoje a família só descobre depois.</p>
+  <div class="facts">
+    <div><strong data-i="f1a">57% dos adultos</strong><span data-i="f1b">nos 42 países pesquisados passaram por um golpe no último ano. As perdas somaram US$ 442 bilhões.</span><cite data-i="f1c">GASA e Feedzai, Global State of Scams 2025</cite></div>
+    <div><strong data-i="f2a">1 em 4 vítimas</strong><span data-i="f2b">perde o dinheiro poucos minutos depois do primeiro contato do golpista.</span><cite data-i="f2c">GASA, Brasil 2026</cite></div>
+    <div><strong data-i="f3a">Só 20%</strong><span data-i="f3b">de quem denunciou recuperou parte ou todo o valor. Prevenir vale mais do que correr atrás.</span><cite data-i="f3c">GASA, Brasil 2026</cite></div>
+    <div><strong data-i="f4a">Poucos segundos de áudio</strong><span data-i="f4b">bastam para clonar a voz de um filho ou neto. Reconhecer a voz deixou de ser prova.</span><cite>FTC, ESET 2026</cite></div>
+  </div>
+</div></section>
+<section id="como"><div class="wrap">
+  <h2 data-i="c_h">Três passos, todos dentro do WhatsApp.</h2>
+  <p class="intro" data-i="c_i">Nada para instalar e nenhuma senha de banco. A pessoa usa o que já sabe usar: encaminhar mensagem.</p>
+  <ol class="how">
+    <li><h3 data-i="s1h">Encaminhe</h3><p data-i="s1p">Chegou um pedido de dinheiro, um link ou um áudio estranho? Encaminhe para o Vouch, do jeito que veio.</p></li>
+    <li><h3 data-i="s2h">Entenda em segundos</h3><p data-i="s2p">A IA lê o texto, ouve o áudio ou lê o print e responde com um cartão colorido: vermelho é golpe, amarelo é suspeito. A explicação vem em linguagem simples, no seu idioma.</p></li>
+    <li><h3 data-i="s3h">A família confirma</h3><p data-i="s3p">Se usam o nome de um parente, o Vouch pergunta direto a ele: "Foi você?". Um toque em "Sim, fui eu" ou "Não fui eu" e a resposta volta na hora.</p></li>
+  </ol>
+</div></section>
+<section id="teste"><div class="wrap">
+  <h2 data-i="t_h">Teste agora, dos dois lados da conversa.</h2>
+  <p class="intro" data-i="t_i">Abra o teste no navegador. Você controla dois celulares: o de quem recebe o golpe e o do filho que confirma. É o mesmo assistente e a mesma IA que rodam no WhatsApp.</p>
+  <div class="try">
+    <div>
+      <ol>
+        <li><span data-i="t1"><b>Diga oi e seu nome</b> no celular da esquerda.</span></li>
+        <li><span data-i="t2"><b>Toque em "Usar o número do Lucas"</b> para escolher quem confirma por você.</span></li>
+        <li><span data-i="t3"><b>Encaminhe um golpe de exemplo</b> e veja o cartão vermelho aparecer.</span></li>
+        <li><span data-i="t4"><b>No celular da direita, toque em "Não fui eu".</b> O golpe é barrado na hora.</span></li>
+      </ol>
+      <div class="ctas"><a class="btn sign" href="/teste" data-i="t_b">Abrir o teste</a><a class="btn ghost" href="/teste?lang=es">Español</a><a class="btn ghost" href="/teste?lang=en">English</a></div>
+      <p class="wa" data-i="t_w">No WhatsApp de verdade: <b>+1 555 180 2355</b>. No piloto, só os números liberados recebem resposta; a abertura geral vem com a verificação da Meta.</p>
+    </div>
+  </div>
+</div></section>
+<section id="treino"><div class="wrap">
+  <h2 data-i="g_h">Um minuto por dia para não cair.</h2>
+  <p class="intro" data-i="g_i">Todo dia o Vouch manda uma mensagem e pergunta: golpe ou não? Quem treina reconhece mais rápido. Experimente:</p>
+  <div class="quiz">
+    <div class="card" id="quiz">
+      <div class="score"><span id="qn"></span><span id="qs"></span></div>
+      <p class="q" id="qt"></p>
+      <div class="opts"><button class="btn no" data-a="1" data-i="bs">Golpe</button><button class="btn yes" data-a="0" data-i="br">Real</button></div>
+      <p class="fb" id="qf" role="status" aria-live="polite"></p>
+    </div>
+    <ul class="perks">
+      <li><b data-i="k1b">Pontos e sequência de dias</b><span data-i="k1s">Cada checagem e cada acerto somam. Treinar todo dia mantém a sequência.</span></li>
+      <li><b data-i="k2b">Placar da família</b><span data-i="k2s">A família vê quem está mais esperto e quanto dinheiro já protegeu junta.</span></li>
+      <li><b data-i="k3b">Mensagens reais também</b><span data-i="k3s">Nem tudo é golpe. Desconfiar de tudo cansa, e o treino ensina a diferença.</span></li>
+    </ul>
+  </div>
+  <div class="mascot"><svg viewBox="0 0 400 400" aria-hidden="true" class="owl"><g fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><use href="#owl-core"/><use href="#owl-body"/><path d="M186 252 L199 265 L222 240" stroke="#ffc93c"/></g><use href="#owl-eyes" fill="currentColor"/></svg><p><b data-i="mb">Vee, a coruja do Vouch</b><span data-i="ms">Sempre acordada, nunca com pressa. O bico é um check: antes de pagar, alguém confirma.</span></p></div>
+</div></section>
+<section id="mundo"><div class="wrap">
+  <h2 data-i="w_h">Um problema global. O mesmo golpe em toda língua.</h2>
+  <p class="intro" data-i="w_i">Onde a família vive no WhatsApp e o dinheiro sai em segundos, o golpe do parente funciona igual. O Vouch reconhece o país pelo número, responde em português, espanhol ou inglês e indica o caminho certo de cada país para quem já pagou.</p>
+  <div class="globe">
+    <div><em data-i="g0e">Mundo</em><strong data-i="g0s">US$ 442 bi</strong><span data-i="g0p">perdidos em golpes em um ano. 57% dos adultos passaram por um.</span><cite>GASA e Feedzai, 2025</cite></div>
+    <div><em data-i="g1e">Brasil</em><strong data-i="g1s">34%</strong><span data-i="g1p">dos golpes mais frequentes são o golpe do WhatsApp. Em SP, 82% das vítimas de golpes virtuais têm 60 anos ou mais.</span><cite>Observatório Febraban 2026; Fundação Seade</cite></div>
+    <div><em data-i="g2e">México</em><strong data-i="g2s">+17%</strong><span data-i="g2p">nas queixas de possível fraude à Condusef de janeiro a maio de 2026. O WhatsApp aparece em 78% das tentativas.</span><cite>Condusef; Xataka México</cite></div>
+    <div><em data-i="g3e">Índia</em><strong data-i="g3s">2,8 milhões</strong><span data-i="g3p">de casos de fraude digital em 2025, com ₹22,5 mil crore perdidos.</span><cite>Moneylife, dados de 2025</cite></div>
+    <div><em data-i="g4e">Estados Unidos</em><strong data-i="g4s">US$ 3 bi</strong><span data-i="g4p">perdidos por pessoas com 60 anos ou mais em 2025, segundo o que foi denunciado. A FTC estima que o valor real chegue a US$ 119,5 bi.</span><cite>FTC, relatório ao Congresso</cite></div>
+    <div><em data-i="g5e">Reino Unido</em><strong data-i="g5s">+19%</strong><span data-i="g5p">na fraude em que a própria vítima autoriza o pagamento, para £576 milhões em 2025.</span><cite>UK Finance, Annual Fraud Report 2026</cite></div>
+  </div>
+  <ol class="road">
+    <li><em>2027</em><h3 data-i="r1h">Brasil</h3><p data-i="r1p">Piloto com 50 famílias em Brasília. Pix Automático para o Plano Família.</p></li>
+    <li><em>2028</em><h3 data-i="r2h">América Latina</h3><p data-i="r2p">México, Colômbia, Argentina, Chile e Peru. O bot já fala espanhol e reconhece esses países pelo número.</p></li>
+    <li><em>2029–30</em><h3 data-i="r3h">Índia e mundo anglófono</h3><p data-i="r3p">UPI na Índia, depois Reino Unido e EUA. Mesmo produto, com a rota local de socorro de cada país.</p></li>
+  </ol>
+</div></section>
+<section id="modelo"><div class="wrap">
+  <h2 data-i="m_h">Cresce família por família, sem depender de ninguém.</h2>
+  <p class="intro" data-i="m_i">Todo usuário novo convida uma pessoa de confiança, então cada cadastro traz outro. Quem paga é o filho que quer proteger os pais. Parceiros aceleram, mas não decidem se o Vouch cresce.</p>
+  <div class="plans">
+    <article><em data-i="m1e">Para todos</em><h3 data-i="m1h">Grátis</h3><p data-i="m1p">Checar qualquer mensagem, jogar o treino e ter 1 pessoa de confiança que confirma pedidos de dinheiro.</p></article>
+    <article class="main"><em data-i="m2e">Quem paga</em><h3 data-i="m2h">Plano Família</h3><div class="price" data-i="m2v">R$ 9,90</div><div class="per" data-i="m2u">por mês, para a família toda</div><ul data-i="m2l"><li>Alerta para até 5 pessoas ao mesmo tempo</li><li>Treino diário de golpe ou não</li><li>7 dias grátis para testar</li><li>Preço ajustado a cada país: MX$ 39, ₹ 99</li></ul></article>
+    <article><em data-i="m3e">Receita B2B</em><h3 data-i="m3h">Inteligência de golpes</h3><p data-i="m3p">Cada número, chave Pix e roteiro de golpe denunciado vira um dado anônimo. Bancos e fintechs assinam a API para bloquear antes.</p></article>
+    <article><em data-i="m4e">Opcional</em><h3 data-i="m4h">Parceiros</h3><p data-i="m4p">Seguradoras e operadoras podem incluir o Plano Família nos seus pacotes. Aceleram o crescimento, nunca o travam.</p></article>
+  </div>
+  <div class="unit">
+    <div><strong data-i="u1s">~R$ 0,15</strong><span data-i="u1p">por mês para atender um usuário grátis</span></div>
+    <div><strong data-i="u2s">~80%</strong><span data-i="u2p">de margem no Plano Família</span></div>
+    <div><strong data-i="u3s">2%</strong><span data-i="u3p">de usuários pagantes já empatam a operação</span></div>
+  </div>
+  <p class="srcs" data-i="m_s">Referências de mercado: Life360 (2,8 milhões de pagantes entre 95,8 milhões de usuários ativos) e Truecaller (mais de 4 milhões de pagantes entre 500 milhões de usuários).</p>
+</div></section>
+<section id="ciencia"><div class="wrap">
+  <h2 data-i="z_h">Desenhado a partir da pesquisa, não do achismo.</h2>
+  <div class="sci">
+    <div><p data-i="z1a">Avisos genéricos perdem efeito com a repetição. Mudar a ação, com pausa e confirmação, funciona mais.</p><p><span data-i="z1b">Por isso o Vouch interrompe com uma ação concreta: não pague agora e espere a família confirmar.</span><small data-i="z1c">Akesson, Gathergood e colegas, experimento com amostra representativa do Reino Unido</small></p></div>
+    <div><p data-i="z2a">Treino prático com 4.000 adultos aumentou a detecção de fraude sem reduzir a confiança em mensagens reais, mas o efeito cai com o tempo.</p><p><span data-i="z2b">Por isso o treino é diário, curto e no mesmo canal onde o golpe chega.</span><small data-i="z2c">Robb e colegas, 2023</small></p></div>
+    <div><p data-i="z3a">Pressão de tempo aumenta a queda em golpes de "evitar uma perda".</p><p><span data-i="z3b">Por isso a primeira resposta é sempre ganhar tempo.</span><small data-i="z3c">Lyu e colegas, 2025</small></p></div>
+    <div><p data-i="z4a">Solidão aumenta a suscetibilidade a fraude em adultos mais velhos.</p><p><span data-i="z4b">Por isso a família entra na conversa, e não só um robô.</span><small data-i="z4c">Liao e colegas, 2024</small></p></div>
+  </div>
+</div></section>
+<section id="faq"><div class="wrap">
+  <h2 data-i="a_h">Dúvidas</h2>
+  <div class="faq">
+    <details><summary data-i="a1q">Preciso instalar algum aplicativo?</summary><p data-i="a1a">Não. O Vouch é um contato no WhatsApp. Você salva o número e conversa como com qualquer pessoa.</p></details>
+    <details><summary data-i="a2q">O Vouch mexe na minha conta do banco?</summary><p data-i="a2a">Não. Ele não pede senha, código nem acesso ao banco. Ele só lê o que você encaminha e ajuda a decidir.</p></details>
+    <details><summary data-i="a3q">E se eu já paguei?</summary><p data-i="a3a">No Brasil, use na hora o botão de contestação do Pix no app do seu banco: a devolução pode sair em até 11 dias. Depois registre um boletim de ocorrência. Em outros países o Vouch indica o caminho local, como a Condusef no México ou a linha 1930 na Índia.</p></details>
+    <details><summary data-i="a4q">Em quais idiomas e países funciona?</summary><p data-i="a4a">Português, espanhol e inglês. O Vouch responde no idioma da mensagem e reconhece o país pelo número: Brasil, México, Colômbia, Argentina, Chile, Peru e Índia já têm o caminho local de socorro.</p></details>
+    <details><summary data-i="a5q">O que acontece com as mensagens que eu encaminho?</summary><p data-i="a5a">São usadas só para dar a resposta. Dos golpes, guardamos apenas os sinais do golpista, sem seu nome nem seu número. Não vendemos dados pessoais.</p></details>
+    <details><summary data-i="a6q">Quanto custa?</summary><p data-i="a6a">Checar mensagens e ter 1 pessoa de confiança é grátis, para sempre. O Plano Família custa R$ 9,90 por mês para a família toda, com 7 dias grátis para testar.</p></details>
+  </div>
+</div></section>
+<section class="final" id="entrar"><div class="wrap">
+  <svg viewBox="0 0 400 400" aria-hidden="true" class="owl"><g fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><use href="#owl-core"/><use href="#owl-body"/><path d="M186 252 L199 265 L222 240" stroke="#ffc93c"/></g><use href="#owl-eyes" fill="currentColor"/></svg>
+  <h2 data-i="e_h">Combine com a sua família antes do golpista.</h2>
+  <form class="join" data-form>
+    <label class="vh" for="n2" data-i="nml">Seu nome</label>
+    <input id="n2" name="name" autocomplete="given-name" data-ph="nm" placeholder="Seu nome">
+    <label class="vh" for="c2" data-i="ccl">País</label>
+    <select id="c2" name="cc" class="cc"></select>
+    <label class="vh" for="p2" data-i="phl">Seu WhatsApp</label>
+    <input id="p2" name="phone" inputmode="tel" autocomplete="tel" data-ph="ph" placeholder="Seu WhatsApp com DDD" required>
+    <label class="vh" for="w2" data-i="wl">Quem você quer proteger</label>
+    <select id="w2" name="protects" data-i="wo"><option value="">Quem você quer proteger?</option><option>Mãe ou pai</option><option>Avó ou avô</option><option>Eu mesmo</option><option>Outra pessoa</option></select>
+    <input class="vh" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn" type="submit" data-i="cta2">Entrar na lista</button>
+    <p class="msg" role="status" aria-live="polite"></p>
+  </form>
+</div></section>
+<footer><div class="wrap"><span data-i="ft1">Vouch, MVP em teste criado para o Desafio FGV 2026 em Brasília.</span><span><a href="/privacidade" data-i="ft3">Privacidade</a> · <span data-i="ft2">O Vouch não substitui seu banco nem a polícia.</span></span></div></footer>
+<script src="/i18n-site.js"></script>
+</body>
+</html>

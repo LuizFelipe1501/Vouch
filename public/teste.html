@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teste o Vouch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0c;--panel:#141416;--panel2:#1b1b1e;--line:#26262b;--ink:#f4f4f5;--mute:#9b9ba3;--dim:#6b6b73;--sign:#ffc93c;--wa:#0b141a;--wa2:#202c33;--wame:#005c4b;--waink:#e9edef;--wagreen:#25d366;--display:"Space Grotesk",system-ui,sans-serif;--body:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}button{font:inherit;cursor:pointer}:focus-visible{outline:2px solid var(--sign);outline-offset:2px;border-radius:6px}
+.top{max-width:1180px;margin:0 auto;padding:22px 20px 8px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.top a.logo{display:flex;align-items:center;gap:10px;font:600 20px var(--display);text-decoration:none}
+.top .owl{width:30px;height:30px}
+.langs{margin-left:auto;display:flex;gap:2px;border:1px solid var(--line);border-radius:10px;padding:3px}
+.langs button{font:600 13px var(--body);border:0;background:transparent;color:var(--mute);padding:6px 10px;border-radius:7px}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.intro{max-width:1180px;margin:0 auto;padding:6px 20px 18px}
+.intro h1{font:600 clamp(28px,4vw,40px)/1.1 var(--display);letter-spacing:-.03em;margin:0 0 8px}
+.intro p{color:var(--mute);margin:0;max-width:70ch}
+.steps{max-width:1180px;margin:0 auto;padding:0 20px 18px;display:flex;gap:8px;flex-wrap:wrap}
+.steps span{font-size:14px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--mute)}
+.steps span.on{border-color:var(--sign);color:var(--ink)}
+.stage{max-width:1180px;margin:0 auto;padding:0 20px 40px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media(max-width:860px){.stage{grid-template-columns:1fr}}
+.role{font:600 15px var(--display);color:var(--mute);margin:0 0 8px;display:flex;justify-content:space-between;gap:10px}
+.role small{font:400 13px var(--body);color:var(--dim)}
+.phone{background:var(--wa);border:1px solid var(--line);border-radius:26px;overflow:hidden;display:flex;flex-direction:column;height:min(78vh,720px);box-shadow:0 24px 70px rgba(0,0,0,.45)}
+.ph{display:flex;align-items:center;gap:11px;padding:12px 14px;background:var(--wa2);color:var(--waink)}
+.ph .av{width:38px;height:38px;border-radius:50%;background:#111b21;display:grid;place-items:center}.ph .av .owl{width:26px;height:26px}
+.ph b{font:600 16px var(--display)}.ph small{display:block;font-size:12.5px;color:#8696a0}
+.log{flex:1;overflow:auto;padding:14px 12px;display:flex;flex-direction:column;gap:6px;background:var(--wa)}
+.m{max-width:84%;padding:7px 10px 8px;border-radius:10px;color:var(--waink);font-size:15px;line-height:1.42;white-space:pre-wrap;word-wrap:break-word;background:var(--wa2)}
+.m.me{align-self:flex-end;background:var(--wame)}
+.m.sys{align-self:center;background:#182229;color:#8696a0;font-size:12.5px;text-align:center;max-width:92%}
+.m img{display:block;width:100%;border-radius:7px;margin:-2px 0 7px}
+.btns{display:flex;flex-direction:column;gap:4px;max-width:84%;width:84%;margin-top:-2px}
+.btns button{background:var(--wa2);color:#53bdeb;border:0;border-radius:9px;padding:9px;font-weight:500}
+.btns button:disabled{color:#5b6b75;cursor:default}
+.typing{align-self:flex-start;color:#8696a0;font-size:13px;padding:4px 8px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;padding:8px 10px 0;background:var(--wa)}
+.chips button{background:#182229;border:1px solid #2a3942;color:var(--waink);font-size:13px;border-radius:999px;padding:6px 11px}
+.chips button.hl{border-color:var(--sign)}
+form{display:flex;gap:8px;padding:10px;background:var(--wa)}
+form input{flex:1;min-width:0;font:inherit;font-size:15px;padding:11px 14px;border-radius:22px;border:0;background:var(--wa2);color:var(--waink)}
+form input::placeholder{color:#8696a0}
+form button{width:44px;height:44px;border-radius:50%;border:0;background:var(--wagreen);color:#0b141a;font-weight:700;display:grid;place-items:center}
+.foot{max-width:1180px;margin:0 auto;padding:0 20px 40px;color:var(--dim);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot button{background:transparent;border:1px solid var(--line);color:var(--mute);border-radius:10px;padding:7px 12px}
+.vh{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="owl"><g fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"><path d="M118 118 L104 44 L170 92 C190 86 210 86 230 92 L296 44 L282 118 C312 150 324 190 324 232 C324 306 270 352 200 352 C130 352 76 306 76 232 C76 190 88 150 118 118 Z"/><path d="M108 150 C140 128 182 138 200 176 C218 138 260 128 292 150"/><circle cx="150" cy="200" r="36"/><circle cx="250" cy="200" r="36"/><path d="M186 252 L199 265 L222 240" stroke="#ffc93c"/></g><circle cx="150" cy="200" r="11" fill="currentColor"/><circle cx="250" cy="200" r="11" fill="currentColor"/></g></defs></svg>
+<div class="top">
+  <a class="logo" href="/"><svg viewBox="0 0 400 400" class="owl" aria-hidden="true"><use href="#owl"/></svg>Vouch</a>
+  <div class="langs" role="group" aria-label="Idioma / Language"><button data-lang="pt">PT</button><button data-lang="es">ES</button><button data-lang="en">EN</button></div>
+</div>
+<div class="intro"><h1 data-t="h1"></h1><p data-t="p"></p></div>
+<div class="steps" id="steps"></div>
+<div class="stage">
+  <div>
+    <p class="role"><span data-t="r1"></span><small id="n1"></small></p>
+    <div class="phone" id="A"></div>
+  </div>
+  <div>
+    <p class="role"><span data-t="r2"></span><small id="n2"></small></p>
+    <div class="phone" id="B"></div>
+  </div>
+</div>
+<div class="foot"><span data-t="f"></span><button id="reset" data-t="rs"></button></div>
+<script>
+var T={
+pt:{h1:'Teste o Vouch nos dois lados da conversa',p:'À esquerda, você é quem recebe o golpe. À direita, você é o filho ou a neta que confirma. É o mesmo assistente que roda no WhatsApp, com a mesma IA.',r1:'Celular da Helena (quem recebe o golpe)',r2:'Celular do Lucas (família)',f:'Simulação do WhatsApp do Vouch. Nenhum dado real é usado.',rs:'Recomeçar',ph:'Mensagem',on:'online',
+ s:['Diga oi','Seu nome','Número da família','Encaminhe um golpe','A família responde'],
+ hi:'oi',nm:'Helena',fam:'Usar o número do Lucas',ex:[['Golpe do filho','Mãe, sou eu, troquei de número. Preciso de R$ 1.800 no Pix agora pra pagar o conserto do carro, é urgente, depois te explico.'],['Falso banco','Central de segurança do banco: detectamos uma compra de R$ 3.200. Para cancelar, informe o código que chegou por SMS e clique em bit.ly/seg-banco'],['Mensagem normal','Oi mãe, cheguei bem. O ônibus atrasou mas deu tudo certo. Te ligo à noite.']],
+ sent:'Mensagem enviada para o celular do Lucas, à direita.',wait:'Vouch está digitando…',err:'Sem conexão com o Vouch. Tente de novo.',name2:'Lucas',cc:'55',area:'61'},
+es:{h1:'Prueba Vouch de los dos lados de la conversación',p:'A la izquierda eres quien recibe la estafa. A la derecha eres el hijo o la nieta que confirma. Es el mismo asistente que funciona en WhatsApp, con la misma IA.',r1:'Celular de María (quien recibe la estafa)',r2:'Celular de Juan (familia)',f:'Simulación del WhatsApp de Vouch. No se usan datos reales.',rs:'Empezar de nuevo',ph:'Mensaje',on:'en línea',
+ s:['Saluda','Tu nombre','Número de la familia','Reenvía una estafa','La familia responde'],
+ hi:'hola',nm:'María',fam:'Usar el número de Juan',ex:[['Estafa del hijo','Mamá, soy yo, cambié de número. Necesito $5,000 por transferencia ahora para pagar el taller, es urgente, luego te explico.'],['Falso banco','Le hablamos de su banco: detectamos un cargo de $8,000. Para cancelarlo, díganos el código que le llegó por SMS y entre a bit.ly/banco-seg'],['Mensaje normal','Mamá, ya llegué. El camión se retrasó pero todo bien. Te llamo en la noche.']],
+ sent:'Mensaje enviado al celular de Juan, a la derecha.',wait:'Vouch está escribiendo…',err:'Sin conexión con Vouch. Inténtalo de nuevo.',name2:'Juan',cc:'52',area:'55'},
+en:{h1:'Try Vouch from both sides of the chat',p:'On the left you are the person who gets the scam. On the right you are the son or granddaughter who confirms. It is the same assistant that runs on WhatsApp, with the same AI.',r1:"Priya's phone (gets the scam)",r2:"Arjun's phone (family)",f:'A simulation of the Vouch WhatsApp chat. No real data is used.',rs:'Start over',ph:'Message',on:'online',
+ s:['Say hi','Your name','Family number','Forward a scam','Family answers'],
+ hi:'hi',nm:'Priya',fam:"Use Arjun's number",ex:[['Fake son','Mum, it\'s me, I changed my number. I need ₹15,000 on UPI right now for the car repair, it\'s urgent, I\'ll explain later.'],['Fake bank','Bank security team: we blocked a ₹40,000 payment. To cancel it, share the OTP we just sent and open bit.ly/bank-safe'],['Normal message','Mum, I got home safe. The train was late but all good. I\'ll call you tonight.']],
+ sent:"Message sent to Arjun's phone, on the right.",wait:'Vouch is typing…',err:'No connection to Vouch. Try again.',name2:'Arjun',cc:'91',area:'98'}};
+
+// ----- WhatsApp look: same rules as the real webhook (api/meta.js) -----
+var LABEL={jogar:'🎯 Jogar',placar:'🏆 Placar',plano:'👨‍👩‍👧 Plano Família',assinar:'✨ Testar grátis',pular:'Pular',jugar:'🎯 Jugar',marcador:'🏆 Marcador',plan:'👨‍👩‍👧 Plan Familia',suscribir:'✨ Probar gratis',saltar:'Saltar',play:'🎯 Play',score:'🏆 Score',subscribe:'✨ Try it free',skip:'Skip'};
+var LEAD=[[/^(PARECE GOLPE|PARECE ESTAFA|LOOKS LIKE A SCAM)/,'🔴 *$1*','scam'],[/^(SUSPEITO|SOSPECHOSO|SUSPICIOUS)/,'🟡 *$1*','suspicious'],[/^(ATENÇÃO\.|ATENCIÓN\.|HEADS UP\.)/,'🚨 *$1*'],[/^(CONFIRMADO\.|CONFIRMED\.)/,'✅ *$1*','confirmed'],[/^(NÃO PAGUE\.|NO PAGUE\.|DON'T PAY\.)/,'⛔ *$1*','blocked'],[/^(Feito\. Avisei|Hecho\. Le avisé|Done\. I told)/,'🛡️ $1'],[/^(Não vi sinal|No vi señales|I didn't see any)/,'🟢 $1'],[/^(\+\d+ (pontos|puntos|points))/,'⭐ $1'],[/^(Pronto\.|Listo\.|Done\.)/,'✅ $1']];
+function style(text){var t=text,card=null;for(var i=0;i<LEAD.length;i++){if(LEAD[i][0].test(t)){t=t.replace(LEAD[i][0],LEAD[i][1]);card=LEAD[i][2]||null;break}}t=t.replace(/^• ([^:\n]{2,40}):/gm,'• *$1:*');return{t:t,card:card}}
+function present(text,lang){
+  var s=style(text),t=s.t,m;
+  if(m=t.match(/\n1 = ([^\n]+)\n2 = ([^\n]+)\s*$/))return{text:t.slice(0,m.index),btns:[['1','✅ '+m[1]],['2','⛔ '+m[2]]]};
+  if(m=t.match(/\n?[^\n]*\b1\b[^\n]*\b(GOLPE|ESTAFA|SCAM)\b[^\n]*\b2\b[^\n]*\bREAL\b[^\n]*$/))return{text:t.slice(0,m.index).trim(),btns:[['1','🚨 '+m[1][0]+m[1].slice(1).toLowerCase()],['2','✅ Real']]};
+  if(s.card){var k=(s.card==='scam'||s.card==='suspicious')?(text.split('\n')[0].split(' — ')[1]||''):'';return{text:t,img:'/api/card?v='+s.card+'&l='+lang+'&k='+encodeURIComponent(k)}}
+  var lines=t.split('\n'),last=lines[lines.length-1],c=[];(last.match(/\b[A-ZÁÉÍÓÚÃÕÇ]{3,}\b/g)||[]).forEach(function(w){w=w.toLowerCase();if(LABEL[w]&&c.indexOf(w)<0&&c.length<3)c.push(w)});
+  if(c.length&&/\b(Mande|Envíe|Send|mande|envíe|send)\b/.test(last))return{text:t,btns:c.map(function(w){return[w,LABEL[w]]})};
+  return{text:t};
+}
+function esc(s){return s.replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+function rich(s){return esc(s).replace(/\*([^*\n]+)\*/g,'<b>$1</b>')}
+
+// ----- Two phones -----
+var lang='pt',P={},stepIdx=0;
+function rnd(n){var s='';for(var i=0;i<n;i++)s+=Math.floor(Math.random()*10);return s}
+function numbers(){var L=T[lang];if(lang==='pt')return['+55'+L.area+'9'+rnd(8),'+55'+L.area+'9'+rnd(8)];if(lang==='es')return['+52'+L.area+rnd(8),'+52'+L.area+rnd(8)];return['+91'+L.area+rnd(8),'+91'+L.area+rnd(8)]}
+function pretty(n){return n.replace(/^\+(\d{2})(\d{2})(\d+)(\d{4})$/,'+$1 $2 $3-$4')}
+function build(id,name,own){
+  var el=document.getElementById(id),L=T[lang];
+  el.innerHTML='<div class="ph"><div class="av"><svg viewBox="0 0 400 400" class="owl" aria-hidden="true"><use href="#owl"/></svg></div><div><b>Vouch</b><small>'+L.on+'</small></div></div><div class="log" aria-live="polite"></div><div class="chips"></div><form><label class="vh">'+L.ph+'</label><input autocomplete="off" placeholder="'+L.ph+'"><button aria-label="Enviar">➤</button></form>';
+  var p={el:el,log:el.querySelector('.log'),chips:el.querySelector('.chips'),input:el.querySelector('input'),num:own,busy:false};
+  el.querySelector('form').onsubmit=function(e){e.preventDefault();var v=p.input.value.trim();if(!v)return;p.input.value='';say(p,v,v)};
+  return p;
+}
+function add(p,cls,html){var d=document.createElement('div');d.className='m '+cls;d.innerHTML=html;p.log.appendChild(d);p.log.scrollTop=1e9;return d}
+function botSay(p,text){
+  var r=present(text,lang),d=add(p,'',(r.img?'<img alt="" src="'+r.img+'">':'')+rich(r.text));
+  if(r.img){d.querySelector('img').onload=function(){p.log.scrollTop=1e9}}
+  if(r.btns){var b=document.createElement('div');b.className='btns';r.btns.forEach(function(x){var bt=document.createElement('button');bt.textContent=x[1];bt.onclick=function(){b.querySelectorAll('button').forEach(function(y){y.disabled=true});say(p,x[0],x[1])};b.appendChild(bt)});p.log.appendChild(b);p.log.scrollTop=1e9}
+}
+async function say(p,payload,shown){
+  if(p.busy)return;p.busy=true;add(p,'me',esc(shown));
+  var ty=document.createElement('div');ty.className='typing';ty.textContent=T[lang].wait;p.log.appendChild(ty);p.log.scrollTop=1e9;
+  try{
+    var r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({from:p.num,text:payload})}).then(function(x){return x.json()});
+    ty.remove();
+    for(var i=0;i<(r.replies||[]).length;i++){await new Promise(function(ok){setTimeout(ok,i?450:150)});botSay(p,r.replies[i])}
+    (r.outbox||[]).forEach(function(o){var q=o.to===P.A.num?P.A:o.to===P.B.num?P.B:null;if(q&&q!==p){botSay(q,o.text);if(q===P.B)add(p,'sys',T[lang].sent)}});
+    if(r.error)add(p,'sys',esc(r.error));
+  }catch(e){ty.remove();add(p,'sys',T[lang].err)}
+  p.busy=false;progress(p,payload);
+}
+function progress(p,payload){
+  if(p===P.A){if(stepIdx===0)stepIdx=1;else if(stepIdx===1)stepIdx=2;else if(stepIdx===2&&/\d{8}/.test(payload.replace(/\D/g,'')))stepIdx=3;else if(stepIdx>=3&&payload.length>40)stepIdx=4}
+  if(p===P.B&&stepIdx===4&&/^[12]$/.test(payload))stepIdx=5;
+  render();
+}
+function chipsA(){
+  var L=T[lang],c=[];
+  if(stepIdx===0)c=[[L.hi,L.hi]];else if(stepIdx===1)c=[[L.nm,L.nm]];else if(stepIdx===2)c=[[P.B.num,L.fam]];else c=L.ex.map(function(e){return[e[1],e[0]]});
+  P.A.chips.innerHTML='';c.forEach(function(x,i){var b=document.createElement('button');b.type='button';b.textContent=x[1];if(i===0)b.className='hl';b.onclick=function(){say(P.A,x[0],x[0])};P.A.chips.appendChild(b)});
+  P.B.chips.innerHTML='';
+}
+function render(){
+  var L=T[lang];document.getElementById('steps').innerHTML=L.s.map(function(s,i){return'<span class="'+(i===Math.min(stepIdx,4)?'on':'')+'">'+(i+1)+'. '+s+'</span>'}).join('');
+  chipsA();
+}
+function start(){
+  var L=T[lang];document.querySelectorAll('[data-t]').forEach(function(e){e.textContent=L[e.dataset.t]});
+  document.documentElement.lang={pt:'pt-BR',es:'es',en:'en'}[lang];document.title={pt:'Teste o Vouch',es:'Prueba Vouch',en:'Try Vouch'}[lang];
+  document.querySelectorAll('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===lang)});
+  var n=numbers();P.A=build('A',L.nm,n[0]);P.B=build('B',L.name2,n[1]);
+  document.getElementById('n1').textContent=pretty(n[0]);document.getElementById('n2').textContent=pretty(n[1]);
+  stepIdx=0;render();
+}
+document.querySelectorAll('[data-lang]').forEach(function(b){b.onclick=function(){lang=b.dataset.lang;start()}});
+document.getElementById('reset').onclick=start;
+var q=new URLSearchParams(location.search).get('lang'),nav=(navigator.language||'pt').slice(0,2);
+lang=(q==='es'||q==='en'||q==='pt')?q:(nav==='es'||nav==='en'?nav:'pt');start();
+</script>
+</body>
+</html>
