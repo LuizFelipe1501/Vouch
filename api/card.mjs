@@ -9,11 +9,12 @@ const LOOK = {
   clear: { bg: '#30A46C', deep: '#1D7A4D', ink: '#FFFFFF' },
   blocked: { bg: '#1F2A44', deep: '#0E1527', ink: '#FFFFFF' },
   confirmed: { bg: '#3E63DD', deep: '#2847B0', ink: '#FFFFFF' },
+  trapped: { bg: '#8E4EC6', deep: '#6534A0', ink: '#FFFFFF' },
 };
 const WORDS = {
-  pt: { scam: ['Parece golpe', 'Não pague e não responda ainda.'], suspicious: ['Suspeito', 'Confirme antes de fazer qualquer coisa.'], clear: ['Sem sinal de golpe', 'Se pedirem dinheiro depois, me mande de novo.'], blocked: ['Golpe barrado', 'A família confirmou: não foi ela.'], confirmed: ['Pedido confirmado', 'Confira o nome na tela antes de pagar.'] },
-  es: { scam: ['Parece estafa', 'No pague ni responda todavía.'], suspicious: ['Sospechoso', 'Confirme antes de hacer cualquier cosa.'], clear: ['Sin señales de estafa', 'Si luego piden dinero, envíemelo de nuevo.'], blocked: ['Estafa frenada', 'La familia confirmó: no fue ella.'], confirmed: ['Pedido confirmado', 'Revise el nombre en pantalla antes de pagar.'] },
-  en: { scam: ['Looks like a scam', "Don't pay or reply yet."], suspicious: ['Suspicious', 'Confirm before doing anything.'], clear: ['No scam signs', 'If they ask for money later, send it again.'], blocked: ['Scam stopped', 'Your family confirmed it was not them.'], confirmed: ['Request confirmed', 'Check the name on screen before paying.'] },
+  pt: { scam: ['Parece golpe', 'Não pague e não responda ainda.'], suspicious: ['Suspeito', 'Confirme antes de fazer qualquer coisa.'], clear: ['Sem sinal de golpe', 'Se pedirem dinheiro depois, me mande de novo.'], blocked: ['Golpe barrado', 'A família confirmou: não foi ela.'], confirmed: ['Pedido confirmado', 'Confira o nome na tela antes de pagar.'], trapped: ['Golpista na isca', 'A Vee pegou a conta laranja dele.'] },
+  es: { scam: ['Parece estafa', 'No pague ni responda todavía.'], suspicious: ['Sospechoso', 'Confirme antes de hacer cualquier cosa.'], clear: ['Sin señales de estafa', 'Si luego piden dinero, envíemelo de nuevo.'], blocked: ['Estafa frenada', 'La familia confirmó: no fue ella.'], confirmed: ['Pedido confirmado', 'Revise el nombre en pantalla antes de pagar.'], trapped: ['Estafador atrapado', 'Vee consiguió su cuenta mula.'] },
+  en: { scam: ['Looks like a scam', "Don't pay or reply yet."], suspicious: ['Suspicious', 'Confirm before doing anything.'], clear: ['No scam signs', 'If they ask for money later, send it again.'], blocked: ['Scam stopped', 'Your family confirmed it was not them.'], confirmed: ['Request confirmed', 'Check the name on screen before paying.'], trapped: ['Scammer hooked', 'Vee got their mule account.'] },
 };
 const h = (style, ...children) => ({ type: 'div', props: { style: { display: 'flex', ...style }, children: children.flat() } });
 

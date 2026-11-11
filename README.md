@@ -5,8 +5,8 @@ Assistente antigolpes no WhatsApp: a pessoa encaminha a mensagem suspeita, o Vou
 ## Estrutura
 
 - `public/` site estático
-  - `index.html` + `i18n-site.js`: página principal (PT/ES/EN)
-  - `teste.html`: teste com dois celulares (quem recebe o golpe e a família), abre em `/teste`
+  - `index.html`: página principal (PT/ES/EN)
+  - `teste.html`: teste com três celulares (quem recebe o golpe, a família e o golpista), abre em `/teste`
   - `privacidade.html`: política de privacidade (usada no app da Meta)
   - `console.html`: console antigo de testes
 - `api/` funções serverless (Vercel)
@@ -15,7 +15,7 @@ Assistente antigolpes no WhatsApp: a pessoa encaminha a mensagem suspeita, o Vou
   - `card.mjs`: gera os cartões coloridos de veredito
   - `whatsapp.js`: webhook do Twilio (alternativa)
   - `cron.js`: treino diário; `waitlist.js`: lista de espera; `shot.mjs`: imagens de tela para o deck
-- `lib/` lógica do bot (`bot.js`), regras (`engine.js`), textos (`i18n.js`, `plan_i18n.js`), serviços (`services.js`: Supabase, Gemini, Twilio)
+- `lib/` lógica do bot (`bot.js`), modo isca em que a Vee conversa com o golpista (`decoy.js`), regras (`engine.js`), textos (`i18n.js`, `plan_i18n.js`), serviços (`services.js`: Supabase, Gemini, Twilio)
 - `supabase.sql` tabelas `vouch_users`, `vouch_waitlist`, `vouch_reports`
 
 ## Como publicar

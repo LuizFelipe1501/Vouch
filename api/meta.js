@@ -18,7 +18,7 @@ async function graph(path, body) {
 const HOST = () => env.PUBLIC_HOST || 'vouch-mvp-theta.vercel.app';
 const LABEL = { jogar: '🎯 Jogar', placar: '🏆 Placar', plano: '👨‍👩‍👧 Plano Família', assinar: '✨ Testar grátis', pular: 'Pular',
   jugar: '🎯 Jugar', marcador: '🏆 Marcador', plan: '👨‍👩‍👧 Plan Familia', suscribir: '✨ Probar gratis', saltar: 'Saltar',
-  play: '🎯 Play', score: '🏆 Score', subscribe: '✨ Try it free', skip: 'Skip' };
+  play: '🎯 Play', score: '🏆 Score', subscribe: '✨ Try it free', skip: 'Skip', isca: '🎣 Desviar para a Vee', cebo: '🎣 Pasarlo a Vee', bait: '🎣 Send to Vee' };
 const LEAD = [
   [/^(PARECE GOLPE|PARECE ESTAFA|LOOKS LIKE A SCAM)/, '🔴 *$1*', 'scam'],
   [/^(SUSPEITO|SOSPECHOSO|SUSPICIOUS)/, '🟡 *$1*', 'suspicious'],
@@ -28,6 +28,7 @@ const LEAD = [
   [/^(Feito\. Avisei|Hecho\. Le avisé|Done\. I told)/, '🛡️ $1'],
   [/^(Não vi sinal|No vi señales|I didn't see any)/, '🟢 $1'],
   [/^(\+\d+ (pontos|puntos|points))/, '⭐ $1'],
+  [/^(🎯)/, '$1', 'trapped'],
   [/^(Pronto\.|Listo\.|Done\.)/, '✅ $1'],
 ];
 function style(text) {
