@@ -24,5 +24,14 @@ module.exports = async (req, res) => {
     body: JSON.stringify(row),
   });
   if (!r.ok) { console.error('waitlist', r.status, (await r.text()).slice(0, 200)); return res.status(500).json({ error: e.fail }); }
+  // Vee opens the conversation on WhatsApp right after sign-up (needs EVO_* env vars; never blocks the sign-up).
+  try {
+    const evo = require('../lib/evo');
+    if (evo.on()) {
+      const { handle } = require('../lib/bot');
+      const out = await handle({ from: row.phone, text: 'oi' });
+      for (const m of out.replies) await evo.send(row.phone, m, b.lang || 'pt');
+    }
+  } catch (err) { console.error('waitlist welcome', err); }
   res.status(200).json({ ok: true });
 };
