@@ -125,3 +125,4 @@ module.exports = async (req, res) => {
   }
   res.status(200).send('ok');
 };
+module.exports.style = style;
