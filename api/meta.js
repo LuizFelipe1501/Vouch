@@ -16,8 +16,8 @@ async function graph(path, body) {
 }
 // ---------- Presentation: colors, bold, verdict cards and tap buttons instead of "send 1 or 2" ----------
 const HOST = () => env.PUBLIC_HOST || 'vouch-mvp-theta.vercel.app';
-const LABEL = { jogar: '🎯 Jogar', placar: '🏆 Placar', plano: '👨‍👩‍👧 Plano Família', assinar: '✨ Testar grátis', pular: 'Pular',
-  jugar: '🎯 Jugar', marcador: '🏆 Marcador', plan: '👨‍👩‍👧 Plan Familia', suscribir: '✨ Probar gratis', saltar: 'Saltar',
+const LABEL = { jogar: '🎯 Jogar', placar: '🏆 Placar', plano: '🛡️ Vouch Circle', assinar: '✨ Testar grátis', pular: 'Pular',
+  jugar: '🎯 Jugar', marcador: '🏆 Marcador', plan: '🛡️ Vouch Circle', suscribir: '✨ Probar gratis', saltar: 'Saltar',
   play: '🎯 Play', score: '🏆 Score', subscribe: '✨ Try it free', skip: 'Skip', isca: '🎣 Desviar para a Vee', cebo: '🎣 Pasarlo a Vee', bait: '🎣 Send to Vee' };
 const LEAD = [
   [/^(PARECE GOLPE|PARECE ESTAFA|LOOKS LIKE A SCAM)/, '🔴 *$1*', 'scam'],
@@ -97,6 +97,7 @@ module.exports = async (req, res) => {
   }
   if (req.method !== 'POST') return res.status(405).send('GET/POST only');
   const raw = await rawBody(req);
+  if (!env.META_APP_SECRET) console.warn('META_APP_SECRET missing: webhook signatures are not being verified');
   if (env.META_APP_SECRET) {
     const sig = 'sha256=' + crypto.createHmac('sha256', env.META_APP_SECRET).update(raw).digest('hex');
     const got = String(req.headers['x-hub-signature-256'] || '');

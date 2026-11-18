@@ -167,7 +167,7 @@ header.top{position:sticky;top:0;z-index:10;background:rgba(230,247,251,.92);bac
 @media (max-width:900px){.train{grid-template-columns:1fr}}
 
 /* plans */
-.plans{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;max-width:900px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;max-width:1100px}
 .plans article{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:30px}
 .plans article.main{border:2px solid var(--ink);box-shadow:8px 8px 0 var(--sign)}
 .plans .tag{font:400 18px var(--hand);color:var(--aquat)}
@@ -175,7 +175,7 @@ header.top{position:sticky;top:0;z-index:10;background:rgba(230,247,251,.92);bac
 .per{color:var(--dim);font-size:15px;margin-top:6px}
 .plans ul{margin:20px 0 0;padding-left:20px;color:var(--mute)}
 .plans li{margin:6px 0}
-@media (max-width:760px){.plans{grid-template-columns:1fr}}
+@media (max-width:900px){.plans{grid-template-columns:1fr}}
 
 /* business */
 #empresas{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -189,6 +189,21 @@ header.top{position:sticky;top:0;z-index:10;background:rgba(230,247,251,.92);bac
 .feed td:first-child,.feed td:nth-child(3){font-family:ui-monospace,Menlo,monospace;font-size:15px}
 .feed .st{font-weight:700;color:var(--safe)}.feed .st.w{color:#B7791F}
 .feed .wrapt{overflow-x:auto}
+.secflow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:0;margin-top:48px}
+.secflow .node{background:var(--paper);border:2px solid var(--ink);border-radius:16px;padding:22px 20px}
+.secflow .node b{display:block;font-size:19px}
+.secflow .node span{display:block;color:var(--mute);margin-top:6px;font-size:16px}
+.secflow .node.you{border-style:dashed}
+.secflow .node.vee{background:var(--ink);color:var(--mist)}.secflow .node.vee span{color:var(--mist2)}
+.secflow .node.bad{border-color:#E0284A}
+.secflow .link{display:flex;align-items:center;justify-content:center;padding:0 10px;font-size:14px;color:var(--mute);text-align:center;min-width:110px}
+.secflow .link i{display:block;font-style:normal;font-size:22px;color:var(--ink)}
+.secrules{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:44px}
+.secrules p{color:var(--mute);margin-top:8px}
+#metas .feed td{font-family:inherit;font-size:16px}#metas .feed td:first-child{font-weight:700}
+#metas .note{color:var(--mute);font-size:15px;margin-top:16px;max-width:900px}
+@media (max-width:900px){.secflow{grid-template-columns:1fr}.secflow .link{padding:10px 0}.secflow .link i{transform:rotate(90deg)}.secrules{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.secrules{grid-template-columns:1fr}}
 .offers{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:48px}
 .offers p{color:var(--mute);margin-top:8px}
 @media (max-width:860px){.offers{grid-template-columns:1fr;gap:24px}}
@@ -231,7 +246,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <header class="top"><div class="wrap bar">
   <a class="logo" href="#"><svg viewBox="0 0 400 400" aria-hidden="true" class="owl"><g fill="none" stroke="currentColor" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"><use href="#owl-core"/><path d="M186 252 L199 265 L222 240" stroke="#1FB5D6"/></g><use href="#owl-eyes" fill="currentColor"/></svg>Vouch</a>
-  <nav aria-label="Seções"><a href="#como" data-i="n1">Como funciona</a><a href="#vee" data-i="n2">A Vee</a><a href="#planos" data-i="n3">Planos</a><a href="#empresas" data-i="n4">Para bancos</a></nav>
+  <nav aria-label="Seções"><a href="#como" data-i="n1">Como funciona</a><a href="#vee" data-i="n2">A Vee</a><a href="#seguranca" data-i="n5">Segurança</a><a href="#planos" data-i="n3">Planos</a><a href="#metas" data-i="n6">Metas</a><a href="#empresas" data-i="n4">Para bancos</a></nav>
   <div class="langs" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" lang="pt">PT</button><button type="button" data-lang="es" lang="es">ES</button><button type="button" data-lang="en" lang="en">EN</button></div>
   <a class="btn" href="#entrar" data-i="ctaTop">Proteger meus pais</a>
 </div></header>
@@ -320,13 +335,59 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </div></section>
 
-<section id="planos" style="padding-top:20px"><div class="wrap">
-  <h2 data-i="pl_h">Seus pais não pagam nada.</h2>
-  <p class="lede" data-i="pl_i">Quem quer cuidar da família inteira assina o Plano Família.</p>
-  <div class="plans">
-    <article><p class="tag" data-i="f_t">para quem é protegido</p><h3 data-i="f_h">Grátis</h3><div class="price" data-i="f_v">R$ 0</div><div class="per" data-i="f_u">para sempre</div><ul data-i="f_l"><li>Checar mensagem, áudio ou print</li><li>1 pessoa de confiança que confirma pedidos</li><li>Desviar golpistas para a Vee</li><li>Treino quando quiser</li></ul></article>
-    <article class="main"><p class="tag" data-i="m_t">para quem cuida</p><h3 data-i="m_h">Plano Família</h3><div class="price" data-i="m_v">R$ 9,90</div><div class="per" data-i="m_u">por mês, para a família toda</div><ul data-i="m_l"><li>Até 5 pessoas protegidas</li><li>Alerta para todos os filhos ao mesmo tempo</li><li>Relatório do mês: golpes barrados e contas derrubadas</li><li>7 dias grátis para testar</li></ul></article>
+<section id="seguranca"><div class="wrap">
+  <h2 data-i="sg_h">A Vee não entra no seu WhatsApp.</h2>
+  <p class="lede" data-i="sg_i">Você encaminha só o que quiser checar. Quando a Vee enrola um golpista, ela fala pelo número do Vouch, nunca pelo seu.</p>
+  <div class="secflow" aria-label="Como os dados circulam">
+    <div class="node you"><b data-i="sg_a1">Seu WhatsApp</b><span data-i="sg_a2">A Vee não lê suas conversas, não pede senha e não instala nada.</span></div>
+    <div class="link"><div><i>→</i><span data-i="sg_l1">só o que você encaminha</span></div></div>
+    <div class="node vee"><b data-i="sg_b1">Número oficial do Vouch</b><span data-i="sg_b2">API oficial do WhatsApp (Meta). Roteiro fechado, sem acesso a contas.</span></div>
+    <div class="link"><div><i>⇄</i><span data-i="sg_l2">a Vee conversa por aqui</span></div></div>
+    <div class="node bad"><b data-i="sg_c1">Golpista</b><span data-i="sg_c2">Fala com a Vee, não com você. Se tentar atacar, encontra um robô sem chave de nada.</span></div>
   </div>
+  <div class="secrules">
+    <div><h3 data-i="sg_r1h">Nunca manda link</h3><p data-i="sg_r1p">Respostas da IA passam por um filtro que remove links e números antes de chegar em você.</p></div>
+    <div><h3 data-i="sg_r2h">Nunca move dinheiro</h3><p data-i="sg_r2p">A Vee não faz pagamento, não pede código e não confirma Pix. Ela só enrola e anota a conta.</p></div>
+    <div><h3 data-i="sg_r3h">Regras antes da IA</h3><p data-i="sg_r3p">A IA pode subir um alerta, nunca baixar. Uma mensagem que tenta enganar a IA continua barrada pelas regras.</p></div>
+    <div><h3 data-i="sg_r4h">Guarda o mínimo</h3><p data-i="sg_r4p">O pedido pendente é apagado em 24h. A base de golpes é anônima, com números mascarados.</p></div>
+  </div>
+</div></section>
+
+<section id="planos" style="padding-top:20px"><div class="wrap">
+  <h2 data-i="pl_h">Checar é de graça. Proteger os seus é assinatura.</h2>
+  <p class="lede" data-i="pl_i">Qualquer pessoa checa mensagens sem pagar. Quem quer proteção completa assina.</p>
+  <div class="plans">
+    <article><p class="tag" data-i="f_t">para começar</p><h3 data-i="f_h">Grátis</h3><div class="price" data-i="f_v">R$ 0</div><div class="per" data-i="f_u">para sempre</div><ul data-i="f_l"><li>Checar qualquer mensagem no WhatsApp</li><li>Resposta clara: golpe ou não, e por quê</li><li>Treino quando quiser</li></ul></article>
+    <article><p class="tag" data-i="x_t">para você</p><h3 data-i="x_h">Plus</h3><div class="price" data-i="x_v">R$ 9,90</div><div class="per" data-i="x_u">por mês</div><ul data-i="x_l"><li>Checagem ilimitada de áudio e print</li><li>A Vee enrola o golpista por você</li><li>Passo a passo se você já pagou</li><li>7 dias grátis para testar</li></ul></article>
+    <article class="main"><p class="tag" data-i="m_t">para os seus</p><h3 data-i="m_h">Circle</h3><div class="price" data-i="m_v">R$ 24,90</div><div class="per" data-i="m_u">por mês, até 5 pessoas</div><ul data-i="m_l"><li>Tudo do Plus para até 5 pessoas</li><li>Alerta para a pessoa de confiança na hora</li><li>Relatório do mês: golpes barrados e contas derrubadas</li><li>7 dias grátis para testar</li></ul></article>
+  </div>
+</div></section>
+
+<section id="metas"><div class="wrap">
+  <h2 data-i="k_h">O que vamos medir.</h2>
+  <p class="lede" data-i="k_i">Uma métrica principal, dinheiro protegido, e quatro grupos de indicadores com meta. As projeções são hipóteses do time, a validar no piloto.</p>
+  <div class="secrules">
+    <div><h3 data-i="k1h">Proteção</h3><p data-i="k1p">Dinheiro protegido por mês e golpes evitados. É a métrica principal.</p></div>
+    <div><h3 data-i="k2h">Confiança</h3><p data-i="k2p">60% dos usuários com uma pessoa de confiança. 80% das confirmações respondidas em até 5 minutos.</p></div>
+    <div><h3 data-i="k3h">Hábito</h3><p data-i="k3p">35% de retenção em 30 dias. 40% dos ativos respondem o treino do dia.</p></div>
+    <div><h3 data-i="k4h">Negócio</h3><p data-i="k4p">De 2% a 3,5% viram assinantes. Cancelamento de no máximo 5% ao mês.</p></div>
+  </div>
+  <div class="feed">
+    <div class="cap"><span data-i="kt_h">Projeção em 3 anos</span><span data-i="kt_s">hipóteses, valores em US$</span></div>
+    <div class="wrapt"><table>
+      <thead><tr><th data-i="kt0">Indicador</th><th data-i="kt1">Ano 1, piloto Brasil</th><th data-i="kt2">Ano 2</th><th data-i="kt3">Ano 3, Brasil, México e Índia</th></tr></thead>
+      <tbody data-i="kt_r">
+        <tr><td>Usuários ativos por mês</td><td>50 mil</td><td>400 mil</td><td>2 milhões</td></tr>
+        <tr><td>Assinantes</td><td>1 mil (2%)</td><td>12 mil (3%)</td><td>70 mil (3,5%)</td></tr>
+        <tr><td>Receita anual</td><td>$38 mil</td><td>$459 mil</td><td>$2,7 milhões</td></tr>
+        <tr><td>Margem bruta</td><td>12%</td><td>38%</td><td>46%</td></tr>
+        <tr><td>Golpes evitados</td><td>18 mil</td><td>144 mil</td><td>720 mil</td></tr>
+        <tr><td>Dinheiro protegido</td><td>$5,4 milhões</td><td>$43 milhões</td><td>$216 milhões</td></tr>
+        <tr><td>Contas laranja capturadas</td><td>9 mil</td><td>72 mil</td><td>360 mil</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <p class="note" data-i="k_n">Premissas: 2 checagens por usuário ao mês; 15% delas são golpe; em 10% dos golpes a pessoa teria pago, perda média de $300; custo de $0,05 por usuário gratuito e $0,30 por assinante ao mês; ticket médio de $3,19.</p>
 </div></section>
 
 <section id="empresas"><div class="wrap">
@@ -345,7 +406,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
   <div class="offers">
     <div><h3 data-i="o1h">Bloqueio antes da próxima vítima</h3><p data-i="o1p">Receba as contas capturadas por API e cruze com a sua base.</p></div>
-    <div><h3 data-i="o2h">Vouch para os seus clientes</h3><p data-i="o2p">Ofereça o Plano Família como benefício. Menos golpe significa menos reembolso e menos reclamação.</p></div>
+    <div><h3 data-i="o2h">Vouch para os seus clientes</h3><p data-i="o2p">Ofereça o Vouch Circle como benefício. Menos golpe significa menos reembolso e menos reclamação.</p></div>
     <div><h3 data-i="o3h">Mensagem oficial verificada</h3><p data-i="o3p">Cadastre seus números. Quando o cliente encaminhar uma mensagem sua, o Vouch confirma que é oficial.</p></div>
   </div>
   <div class="ctas"><a class="btn" href="#entrar" data-i="b_c">Falar com o time</a></div>
@@ -387,7 +448,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <script>
 var L={
-es:{n1:'Cómo funciona',n2:'Vee',n3:'Planes',n4:'Para bancos',ctaTop:'Proteger a mis papás',
+es:{n6:'Metas',k_h:'Lo que vamos a medir.',k_i:'Una métrica principal, dinero protegido, y cuatro grupos de indicadores con meta. Las proyecciones son hipótesis del equipo, a validar en el piloto.',k1h:'Protección',k1p:'Dinero protegido al mes y estafas evitadas. Es la métrica principal.',k2h:'Confianza',k2p:'60% de los usuarios con una persona de confianza. 80% de las confirmaciones respondidas en 5 minutos.',k3h:'Hábito',k3p:'35% de retención a 30 días. 40% de los activos responden el entrenamiento del día.',k4h:'Negocio',k4p:'Entre 2% y 3,5% se suscriben. Cancelación de máximo 5% al mes.',kt_h:'Proyección a 3 años',kt_s:'hipótesis, valores en US$',kt0:'Indicador',kt1:'Año 1, piloto Brasil',kt2:'Año 2',kt3:'Año 3, Brasil, México e India',kt_r:'<tr><td>Usuarios activos al mes</td><td>50 mil</td><td>400 mil</td><td>2 millones</td></tr><tr><td>Suscriptores</td><td>1 mil (2%)</td><td>12 mil (3%)</td><td>70 mil (3,5%)</td></tr><tr><td>Ingreso anual</td><td>$38 mil</td><td>$459 mil</td><td>$2,7 millones</td></tr><tr><td>Margen bruto</td><td>12%</td><td>38%</td><td>46%</td></tr><tr><td>Estafas evitadas</td><td>18 mil</td><td>144 mil</td><td>720 mil</td></tr><tr><td>Dinero protegido</td><td>$5,4 millones</td><td>$43 millones</td><td>$216 millones</td></tr><tr><td>Cuentas mula capturadas</td><td>9 mil</td><td>72 mil</td><td>360 mil</td></tr>',k_n:'Supuestos: 2 revisiones por usuario al mes; 15% son estafa; en 10% de las estafas la persona habría pagado, pérdida media de $300; costo de $0,05 por usuario gratuito y $0,30 por suscriptor al mes; ticket medio de $3,19.',n5:'Seguridad',sg_h:'Vee no entra en tu WhatsApp.',sg_i:'Reenvías solo lo que quieras revisar. Cuando Vee entretiene a un estafador, habla desde el número de Vouch, nunca desde el tuyo.',sg_a1:'Tu WhatsApp',sg_a2:'Vee no lee tus chats, no pide contraseñas y no instala nada.',sg_l1:'solo lo que reenvías',sg_b1:'Número oficial de Vouch',sg_b2:'API oficial de WhatsApp (Meta). Guion cerrado, sin acceso a cuentas.',sg_l2:'Vee conversa desde aquí',sg_c1:'Estafador',sg_c2:'Habla con Vee, no contigo. Si intenta atacar, encuentra un bot sin llave de nada.',sg_r1h:'Nunca envía enlaces',sg_r1p:'Las respuestas de la IA pasan por un filtro que quita enlaces y números antes de llegarte.',sg_r2h:'Nunca mueve dinero',sg_r2p:'Vee no paga, no pide códigos y no confirma transferencias. Solo entretiene y anota la cuenta.',sg_r3h:'Reglas antes que la IA',sg_r3p:'La IA puede subir una alerta, nunca bajarla. Un mensaje que intenta engañar a la IA sigue frenado por las reglas.',sg_r4h:'Guarda lo mínimo',sg_r4p:'El pedido pendiente se borra en 24 h. La base de estafas es anónima, con números enmascarados.',n1:'Cómo funciona',n2:'Vee',n3:'Planes',n4:'Para bancos',ctaTop:'Proteger a mis papás',
 h1:'Tu mamá va a recibir este mensaje.',
 lead:'La pregunta es con quién habla antes de pagar. Vouch es un contacto de WhatsApp que lee el mensaje, lo confirma contigo y, si es estafa, pone una IA a entretener al estafador.',
 cta1:'Proteger a mis papás',cta0:'Verlo funcionando',fine:'Gratis para quien está protegido. Nada que instalar.',
@@ -409,13 +470,14 @@ r_h:'Resultado de la conversación',r_l:'<li><span>Cuentas mula descubiertas</sp
 r_n:'El estafador cambia de número cada día, pero necesita una cuenta para cobrar. Cada cuenta registrada va a bloqueo y protege a la próxima familia de su lista.',
 g_h:'¿Estafa o no? Entrena en un minuto.',g_i:'Cada día Vouch le manda un mensaje a la familia para practicar. Prueba estos cuatro.',bs:'Estafa',br:'Es real',
 p1b:'Las estafas que circulan ahora',p1s:'Falso banco, falso familiar, voz clonada. El entrenamiento cambia junto con las estafas.',p2b:'Mensajes normales también',p2s:'Desconfiar de todo cansa. El entrenamiento enseña la diferencia.',p3b:'Marcador de la familia',p3s:'Puntos por acertar, por revisar y por cada estafador que atrapó Vee.',
-pl_h:'Tus papás no pagan nada.',pl_i:'Quien quiere cuidar a toda la familia contrata el Plan Familia.',
-f_t:'para quien está protegido',f_h:'Gratis',f_v:'MX$ 0',f_u:'para siempre',f_l:'<li>Revisar mensaje, audio o captura</li><li>1 persona de confianza que confirma pedidos</li><li>Desviar estafadores a Vee</li><li>Entrenamiento cuando quieras</li>',
-m_t:'para quien cuida',m_h:'Plan Familia',m_v:'MX$ 39',m_u:'al mes, para toda la familia',m_l:'<li>Hasta 5 personas protegidas</li><li>Alerta a todos los hijos al mismo tiempo</li><li>Reporte del mes: estafas frenadas y cuentas bloqueadas</li><li>7 días gratis para probar</li>',
+pl_h:'Revisar es gratis. Proteger a los tuyos es suscripción.',pl_i:'Cualquier persona revisa mensajes sin pagar. Quien quiere protección completa se suscribe.',
+f_t:'para empezar',f_h:'Gratis',f_v:'MX$ 0',f_u:'para siempre',f_l:'<li>Revisar cualquier mensaje en WhatsApp</li><li>Respuesta clara: estafa o no, y por qué</li><li>Entrenamiento cuando quieras</li>',
+x_t:'para ti',x_h:'Plus',x_v:'MX$ 39',x_u:'al mes',x_l:'<li>Revisión ilimitada de audios y capturas</li><li>Vee entretiene al estafador por ti</li><li>Paso a paso si ya pagaste</li><li>7 días gratis para probar</li>',
+m_t:'para los tuyos',m_h:'Circle',m_v:'MX$ 99',m_u:'al mes, hasta 5 personas',m_l:'<li>Todo lo de Plus para hasta 5 personas</li><li>Alerta inmediata a la persona de confianza</li><li>Reporte del mes: estafas frenadas y cuentas bloqueadas</li><li>7 días gratis para probar</li>',
 b_h:'Para bancos y fintechs: la cuenta del estafador antes de la transferencia.',b_i:'Cada conversación de Vee genera un dato que hoy nadie tiene: la cuenta mula activa, en el momento de la estafa, confirmada por la propia conversación.',
 fd_h:'Feed de cuentas mula',fd_s:'ejemplo, datos ficticios',fd1:'Hora',fd2:'Tipo de estafa',fd3:'Cuenta capturada',fd4:'Estado',
 fd_r:'<tr><td>14:02</td><td>Falso hijo</td><td>CLABE 0121 ••••12</td><td class="st">Enviada al banco</td></tr><tr><td>13:47</td><td>Falso banco</td><td>tarjeta •••• 4821</td><td class="st">Enviada al banco</td></tr><tr><td>13:31</td><td>Falso soporte</td><td>cuenta ••••7-3</td><td class="st w">En confirmación</td></tr>',
-o1h:'Bloqueo antes de la próxima víctima',o1p:'Recibe las cuentas capturadas por API y crúzalas con tu base.',o2h:'Vouch para tus clientes',o2p:'Ofrece el Plan Familia como beneficio. Menos estafas significa menos reembolsos y menos quejas.',o3h:'Mensaje oficial verificado',o3p:'Registra tus números. Cuando un cliente reenvíe un mensaje tuyo, Vouch confirma que es oficial.',b_c:'Hablar con el equipo',
+o1h:'Bloqueo antes de la próxima víctima',o1p:'Recibe las cuentas capturadas por API y crúzalas con tu base.',o2h:'Vouch para tus clientes',o2p:'Ofrece Vouch Circle como beneficio. Menos estafas significa menos reembolsos y menos quejas.',o3h:'Mensaje oficial verificado',o3p:'Registra tus números. Cuando un cliente reenvíe un mensaje tuyo, Vouch confirma que es oficial.',b_c:'Hablar con el equipo',
 a_h:'Antes de que preguntes',trust:'<span><b>Nunca pide contraseñas</b> ni códigos</span><span><b>Vee nunca paga</b> nada</span><span>Tu número <b>no entra en la lista</b>, solo el del estafador</span>',
 a1q:'¿Hay que instalar alguna app?',a1a:'No. Vouch es un contacto de WhatsApp. Tu mamá guarda el número y escribe como a cualquier persona.',
 a2q:'¿Es seguro que Vee hable con el estafador?',a2a:'Sí. La conversación ocurre en el número de Vouch, no en el de ella. Vee nunca manda dinero ni datos de la familia, y tu mamá puede bloquear al estafador en cuanto manda el mensaje.',
@@ -426,7 +488,7 @@ e_h:'Pon Vouch en el WhatsApp de tus papás hoy.',e_i:'Deja tu número. Te escri
 nml:'Tu nombre',ccl:'País',phl:'Tu WhatsApp',wl:'A quién quieres proteger',nm:'Tu nombre',ph:'Tu WhatsApp con lada',
 wo:'<option value="">¿A quién quieres proteger?</option><option>Mamá o papá</option><option>Abuela o abuelo</option><option>A mí mismo</option><option>Soy de un banco o empresa</option>',
 cta2:'Quiero Vouch',simL:'Simulación',simR:'Ver otra vez',ft1:'Vouch, creado en el Desafío FGV 2026, en Brasilia.',ft3:'Privacidad',ft2:'Vouch no sustituye a tu banco ni a la policía.'},
-en:{n1:'How it works',n2:'Vee',n3:'Plans',n4:'For banks',ctaTop:'Protect my parents',
+en:{n6:'KPIs',k_h:'What we will measure.',k_i:'One north-star metric, money protected, and four groups of indicators with targets. Projections are team hypotheses, to be validated in the pilot.',k1h:'Protection',k1p:'Money protected per month and scams stopped. This is the north star.',k2h:'Trust',k2p:'60% of users with a trusted contact set up. 80% of confirmations answered within 5 minutes.',k3h:'Habit',k3p:'35% retention at 30 days. 40% of active users answer the daily practice.',k4h:'Business',k4p:'2% to 3.5% become subscribers. Paid churn of 5% a month at most.',kt_h:'3-year projection',kt_s:'hypotheses, values in US$',kt0:'Indicator',kt1:'Year 1, Brazil pilot',kt2:'Year 2',kt3:'Year 3, Brazil, Mexico and India',kt_r:'<tr><td>Monthly active users</td><td>50k</td><td>400k</td><td>2M</td></tr><tr><td>Subscribers</td><td>1k (2%)</td><td>12k (3%)</td><td>70k (3.5%)</td></tr><tr><td>Annual revenue</td><td>$38k</td><td>$459k</td><td>$2.7M</td></tr><tr><td>Gross margin</td><td>12%</td><td>38%</td><td>46%</td></tr><tr><td>Scams stopped</td><td>18k</td><td>144k</td><td>720k</td></tr><tr><td>Money protected</td><td>$5.4M</td><td>$43M</td><td>$216M</td></tr><tr><td>Mule accounts captured</td><td>9k</td><td>72k</td><td>360k</td></tr>',k_n:'Assumptions: 2 checks per user a month; 15% are scams; in 10% of scams the person would have paid, average loss $300; cost of $0.05 per free user and $0.30 per subscriber a month; average ticket $3.19.',n5:'Security',sg_h:'Vee never gets inside your WhatsApp.',sg_i:'You forward only what you want checked. When Vee strings a scammer along, she talks from the Vouch number, never from yours.',sg_a1:'Your WhatsApp',sg_a2:'Vee does not read your chats, ask for passwords or install anything.',sg_l1:'only what you forward',sg_b1:'Official Vouch number',sg_b2:'Official WhatsApp API (Meta). Fixed script, no access to accounts.',sg_l2:'Vee talks from here',sg_c1:'Scammer',sg_c2:'Talks to Vee, not to you. If they attack, they find a bot that holds no keys.',sg_r1h:'Never sends links',sg_r1p:'AI replies go through a filter that strips links and numbers before they reach you.',sg_r2h:'Never moves money',sg_r2p:'Vee never pays, never asks for codes and never confirms a transfer. She stalls and records the account.',sg_r3h:'Rules before AI',sg_r3p:'The AI can raise an alert, never lower one. A message built to fool the AI is still stopped by the rules.',sg_r4h:'Keeps the minimum',sg_r4p:'A pending request is deleted after 24 hours. The scam database is anonymous, with numbers masked.',n1:'How it works',n2:'Vee',n3:'Plans',n4:'For banks',ctaTop:'Protect my parents',
 h1:'Your mom is going to get this message.',
 lead:'What matters is who she talks to before she pays. Vouch is a WhatsApp contact that reads the message, checks with you and, if it is a scam, puts an AI on the scammer to waste their time.',
 cta1:'Protect my parents',cta0:'See it working',fine:'Free for the person being protected. Nothing to install.',
@@ -448,13 +510,14 @@ r_h:'What the chat produced',r_l:'<li><span>Mule accounts found</span><span>2</s
 r_n:'Scammers change numbers every day, but they need an account to get paid. Every account we record goes to blocking and protects the next family on their list.',
 g_h:'Scam or not? Practice in one minute.',g_i:'Every day Vouch sends the family a message to practice on. Try these four.',bs:'Scam',br:'It\'s real',
 p1b:'The scams going around right now',p1s:'Fake bank alerts, fake IRS agents, cloned voices. Practice changes as the scams change.',p2b:'Normal messages too',p2s:'Distrusting everything is exhausting. Practice teaches the difference.',p3b:'Family scoreboard',p3s:'Points for right answers, for checking and for every scammer Vee caught.',
-pl_h:'Your parents pay nothing.',pl_i:'Whoever wants to look after the whole family gets the Family plan.',
-f_t:'for the protected person',f_h:'Free',f_v:'$0',f_u:'forever',f_l:'<li>Check any message, voice note or screenshot</li><li>1 trusted person who confirms requests</li><li>Send scammers to Vee</li><li>Practice anytime</li>',
-m_t:'for whoever looks after them',m_h:'Family plan',m_v:'$1.90',m_u:'a month, for the whole family',m_l:'<li>Up to 5 protected people</li><li>Alerts every child at the same time</li><li>Monthly report: scams stopped and accounts taken down</li><li>7-day free trial</li>',
+pl_h:'Checking is free. Protecting your people is a subscription.',pl_i:'Anyone can check messages for free. Full protection is a monthly plan.',
+f_t:'to get started',f_h:'Free',f_v:'$0',f_u:'forever',f_l:'<li>Check any message on WhatsApp</li><li>A clear answer: scam or not, and why</li><li>Practice anytime</li>',
+x_t:'for you',x_h:'Plus',x_v:'$1.99',x_u:'a month',x_l:'<li>Unlimited voice note and screenshot checks</li><li>Vee takes on the scammer for you</li><li>Step-by-step help if you already paid</li><li>7-day free trial</li>',
+m_t:'for your people',m_h:'Circle',m_v:'$4.99',m_u:'a month, up to 5 people',m_l:'<li>Everything in Plus for up to 5 people</li><li>Instant alert to your trusted contact</li><li>Monthly report: scams stopped and accounts taken down</li><li>7-day free trial</li>',
 b_h:'For banks and fintechs: the scammer\'s account before the transfer.',b_i:'Every Vee conversation produces data nobody else has: the live mule account, at the moment of the scam, confirmed by the conversation itself.',
 fd_h:'Mule account feed',fd_s:'example, fictional data',fd1:'Time',fd2:'Scam type',fd3:'Account captured',fd4:'Status',
 fd_r:'<tr><td>14:02</td><td>Fake son</td><td>Zelle mike.r•••@gmail.com</td><td class="st">Sent to bank</td></tr><tr><td>13:47</td><td>Fake IRS agent</td><td>Zelle (555) •••-0112</td><td class="st">Sent to bank</td></tr><tr><td>13:31</td><td>Fake bank alert</td><td>acct ••••7731 routing ••••0021</td><td class="st w">Confirming</td></tr>',
-o1h:'Block before the next victim',o1p:'Get captured accounts through an API and match them against your base.',o2h:'Vouch for your customers',o2p:'Offer the Family plan as a benefit. Fewer scams means fewer refunds and fewer complaints.',o3h:'Verified official messages',o3p:'Register your numbers. When a customer forwards one of your messages, Vouch confirms it is official.',b_c:'Talk to the team',
+o1h:'Block before the next victim',o1p:'Get captured accounts through an API and match them against your base.',o2h:'Vouch for your customers',o2p:'Offer Vouch Circle as a benefit. Fewer scams means fewer refunds and fewer complaints.',o3h:'Verified official messages',o3p:'Register your numbers. When a customer forwards one of your messages, Vouch confirms it is official.',b_c:'Talk to the team',
 a_h:'Before you ask',trust:'<span><b>Never asks for passwords</b> or codes</span><span><b>Vee never pays</b> anything</span><span>Your number <b>stays off the list</b>, only the scammer\'s goes in</span>',
 a1q:'Do I need to install an app?',a1a:'No. Vouch is a WhatsApp contact. Your mom saves the number and chats like with anyone else.',
 a2q:'Is it safe to let Vee talk to the scammer?',a2a:'Yes. The chat happens on Vouch\'s number, not hers. Vee never sends money or family details, and your mom can block the scammer as soon as she sends the reply.',
