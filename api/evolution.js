@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
     let out;
     try { out = await handle({ from, text, media: file, isVoice }); }
     catch (e) { console.error(e); out = { replies: [errorText(from)], outbox: [] }; }
-    for (const r of out.replies) await evo.send(from, r, langOf(from));
+    for (const r of out.replies) await evo.send(from, r, langOf(from), { reply: true });
     await Promise.all(out.outbox.map(o => evo.send(o.to, o.text, langOf(o.to))));
   }
   res.status(200).send('ok');
