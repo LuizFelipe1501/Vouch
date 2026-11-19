@@ -28,9 +28,10 @@ module.exports = async (req, res) => {
   try {
     const evo = require('../lib/evo');
     if (evo.on()) {
-      const { handle } = require('../lib/bot');
-      const out = await handle({ from: row.phone, text: 'oi' });
-      for (const m of out.replies) await evo.send(row.phone, m, b.lang || 'pt');
+      const { signup } = require('../lib/bot');
+      const lang = ['pt', 'es', 'en'].includes(b.lang) ? b.lang : 'pt';
+      const replies = await signup({ phone: row.phone, name: row.name, lang });
+      for (const m of replies) await evo.send(row.phone, m, lang);
     }
   } catch (err) { console.error('waitlist welcome', err); }
   res.status(200).json({ ok: true });
